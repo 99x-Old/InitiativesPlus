@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.Application", "InitiativesPlus.99X.Application", "{A15C3088-502C-4168-BE90-DB1BFE835132}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.ClientApp", "InitiativesPlus.99X.ClientApp", "{A752DC53-82E6-4C1A-B867-3CD0A00AA0FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.Domain", "InitiativesPlus.99X.Domain", "{827FDECD-7ED2-499A-ACF1-D6B33B76A5C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.Infrastructure.Data", "InitiativesPlus.99X.Infrastructure.Data", "{BF728E3B-9227-494F-ACA6-BCB52E614A2E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.Infrastructure.IoC", "InitiativesPlus.99X.Infrastructure.IoC", "{5BB6A5F5-CE2C-4136-9860-ECA97E92A8E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.Presentation", "InitiativesPlus.99X.Presentation", "{D24991B2-554E-4109-B145-D0C9457E085F}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "InitiativesPlus.ClientApp", "InitiativesPlus.ClientApp\", "{271DEDF4-D4E3-4104-A5ED-1468C936C922}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_3940"
+		Debug.AspNetCompiler.PhysicalPath = "InitiativesPlus.ClientApp\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_3940\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_3940"
+		Release.AspNetCompiler.PhysicalPath = "InitiativesPlus.ClientApp\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_3940\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "3940"
+		SlnRelativePath = "InitiativesPlus.ClientApp\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{271DEDF4-D4E3-4104-A5ED-1468C936C922}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{271DEDF4-D4E3-4104-A5ED-1468C936C922}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{271DEDF4-D4E3-4104-A5ED-1468C936C922} = {A752DC53-82E6-4C1A-B867-3CD0A00AA0FC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C6074634-9110-4666-8A18-D433EE8984EE}
+	EndGlobalSection
+EndGlobal
