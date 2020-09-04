@@ -7,6 +7,6 @@ namespace InitiativesPlus.Application.ViewModels
 {
     public class InitiativeViewModel
     {
-        public IEnumerable<Initiative> Initiatives { get; set; }
+        public string Name { get; set; }
     }
 }

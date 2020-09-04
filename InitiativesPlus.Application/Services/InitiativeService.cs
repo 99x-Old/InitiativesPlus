@@ -1,4 +1,5 @@
-﻿using InitiativesPlus.Application.Interfaces;
+﻿using AutoMapper;
+using InitiativesPlus.Application.Interfaces;
 using InitiativesPlus.Application.ViewModels;
 using InitiativesPlus.Domain.Interfaces;
 using System;
@@ -11,17 +12,17 @@ namespace InitiativesPlus.Application.Services
     public class InitiativeService : IInitiativeService
     {
         public IInitiativeRepository _initiativeRepository;
-        public InitiativeService(IInitiativeRepository initiativeRepository)
+        private IMapper _mapper;
+        public InitiativeService(IInitiativeRepository initiativeRepository, IMapper mapper)
         {
             _initiativeRepository = initiativeRepository;
+            _mapper = mapper;
         }
-        public async Task<InitiativeViewModel> GetInitiatives()
+        public async Task<IEnumerable<InitiativeViewModel>> GetInitiatives()
         {
-
-            return new InitiativeViewModel()
-            {
-                Initiatives = await _initiativeRepository.GetInitiatives()
-            };
+            var initiatives = await _initiativeRepository.GetInitiatives();
+            var initiaviveToReturn = _mapper.Map<IEnumerable<InitiativeViewModel>>(initiatives);
+            return initiaviveToReturn;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using InitiativesPlus.Application.Interfaces;
+﻿using AutoMapper;
+using InitiativesPlus.Application.Interfaces;
+using InitiativesPlus.Application.MappingProfile;
 using InitiativesPlus.Application.Services;
 using InitiativesPlus.Domain.Interfaces;
 using InitiativesPlus.Infrastructure.Data.Repositories;
@@ -13,6 +15,7 @@ namespace InitiativesPlus.Infrastructure.IoC
     {
         public static void RegisterServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(AutoMapperProfiles));
             //InitiativesPlus.Application
             services.AddScoped<IInitiativeService, InitiativeService>();
 
