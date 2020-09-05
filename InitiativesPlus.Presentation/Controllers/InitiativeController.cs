@@ -12,7 +12,7 @@ namespace InitiativesPlus.Presentation.Controllers
     [ApiController]
     public class InitiativeController : ControllerBase
     {
-        private IInitiativeService _initiativeService;
+        private readonly IInitiativeService _initiativeService;
 
         public InitiativeController(IInitiativeService initiativeService)
         {
