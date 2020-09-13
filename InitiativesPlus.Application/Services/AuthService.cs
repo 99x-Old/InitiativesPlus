@@ -20,6 +20,12 @@ namespace InitiativesPlus.Application.Services
             _mapper = mapper;
         }
 
+        public async Task<UserForLoginViewModel> Login(UserForLoginViewModel user)
+        {
+            var loginUser = await _authRepository.Login(user.Username.ToLower(), user.Password);
+            return _mapper.Map<UserForLoginViewModel>(loginUser);
+        }
+
         public async Task<UserForRegisterViewModel> Register(UserForRegisterViewModel userq)
         {
             //var userToCreate = new User

@@ -19,8 +19,8 @@ namespace InitiativesPlus.Infrastructure.Data.Context
             // Configure User to UserRole dependancy
             modelBuilder.Entity<User>()
                     .HasOne(a => a.UserRole)
-                    .WithOne(b => b.User)
-                    .HasForeignKey<User>(b => b.RoleId);
+                    .WithMany(b => b.Users)
+                    .HasForeignKey(a => a.RoleId);
 
         }
     }

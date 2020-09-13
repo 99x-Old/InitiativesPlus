@@ -8,6 +8,6 @@ namespace InitiativesPlus.Domain.Models
     {
         public int Id { get; set; }
         public string RoleName { get; set; }
-        public User User { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }
