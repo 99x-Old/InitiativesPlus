@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using InitiativesPlus.Application.Interfaces;
 using InitiativesPlus.Application.ViewModels;
+using InitiativesPlus.Presentation.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace InitiativesPlus.Presentation.Controllers
 {
@@ -14,10 +16,11 @@ namespace InitiativesPlus.Presentation.Controllers
     public class UserController : ControllerBase
     {
         private readonly IAuthService _authService;
-
-        public UserController(IAuthService authService)
+        private readonly IStringLocalizer<ErrorStrings> _errorLocalizer;
+        public UserController(IAuthService authService, IStringLocalizer<ErrorStrings> errorLocalizer)
         {
             _authService = authService;
+            _errorLocalizer = errorLocalizer;
         }
 
         [HttpPost("register")] //<host>/api/auth/register
@@ -30,7 +33,7 @@ namespace InitiativesPlus.Presentation.Controllers
             userForRegister.Username = userForRegister.Username.ToLower(); //Convert username to lower case before storing in database.
 
             if (await _authService.UserExists(userForRegister.Username))
-                return BadRequest("Username is already taken");
+                return BadRequest(_errorLocalizer["UserExists"].Value);
 
             var createUser = await _authService.Register(userForRegister);
 

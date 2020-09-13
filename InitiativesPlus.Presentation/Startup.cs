@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using InitiativesPlus.Infrastructure.Data.Context;
@@ -7,6 +8,7 @@ using InitiativesPlus.Infrastructure.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +36,28 @@ namespace InitiativesPlus.Presentation
                     Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddControllers();
+            //Adds the localization services to the services container. The code above also sets the resources path to "Resources"
+            services.AddLocalization();
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo("en-US")
+                };
+
+                options.DefaultRequestCulture = new RequestCulture("en-US", "en-US");
+
+                // You must explicitly state which cultures your application supports.
+                // These are the cultures the app supports for formatting 
+                // numbers, dates, etc.
+
+                options.SupportedCultures = supportedCultures;
+
+                // These are the cultures the app supports for UI strings, 
+                // i.e. we have localized resources for.
+
+                options.SupportedUICultures = supportedCultures;
+            });
             RegisterServices(services);
         }
 
