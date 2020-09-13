@@ -18,9 +18,11 @@ namespace InitiativesPlus.Infrastructure.IoC
             services.AddAutoMapper(typeof(AutoMapperProfiles));
             //InitiativesPlus.Application
             services.AddScoped<IInitiativeService, InitiativeService>();
+            services.AddScoped<IAuthService, AuthService>();
 
             //InitiativesPlus.Domain.Interfaces | InitiativesPlus.Infrastructure.Data.Repositories
             services.AddScoped<IInitiativeRepository, InitiativeRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
         }
     }
 }

@@ -12,6 +12,10 @@ namespace InitiativesPlus.Application.MappingProfile
         public AutoMapperProfiles()
         {
             CreateMap<Initiative, InitiativeViewModel>();
+            CreateMap<User, UserForRegisterViewModel>();
+
+
+            CreateMap<UserForRegisterViewModel, User>();
         }
     }
 }
