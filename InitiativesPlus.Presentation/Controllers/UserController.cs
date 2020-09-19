@@ -23,11 +23,13 @@ namespace InitiativesPlus.Presentation.Controllers
         private readonly IAuthService _authService;
         private readonly IStringLocalizer<ErrorStrings> _errorLocalizer;
         private readonly IConfiguration _config;
-        public UserController(IAuthService authService, IStringLocalizer<ErrorStrings> errorLocalizer, IConfiguration config)
+        private readonly IUserService _userService;
+        public UserController(IAuthService authService, IStringLocalizer<ErrorStrings> errorLocalizer, IConfiguration config, IUserService userService)
         {
             _authService = authService;
             _errorLocalizer = errorLocalizer;
             _config = config;
+            _userService = userService;
         }
 
         [HttpPost("register")] //<host>/api/auth/register
@@ -60,9 +62,9 @@ namespace InitiativesPlus.Presentation.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]{
-                    new Claim(ClaimTypes.NameIdentifier as string, userFromService.Id.ToString() as string),
-                    new Claim(ClaimTypes.Name as string, userFromService.Username as string),
-                    new Claim(ClaimTypes.Role as string, userFromService.RoleName as string)
+                    new Claim(ClaimTypes.NameIdentifier, userFromService.Id.ToString()),
+                    new Claim(ClaimTypes.Name, userFromService.Username),
+                    new Claim(ClaimTypes.Role, userFromService.RoleName)
                 }),
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
@@ -73,5 +75,21 @@ namespace InitiativesPlus.Presentation.Controllers
 
             return Ok(new { tokenString });
         }
+
+        [HttpPut("assign-role")]
+        public async Task<IActionResult> AssignRole([FromBody] AssignRoleViewModel assignRoleViewModel)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!await _authService.UserExists(assignRoleViewModel.UserName))
+                return NotFound($"Could not find user with an username of {assignRoleViewModel.UserName}");
+
+            if (await _userService.AssignRoleAsync(assignRoleViewModel))
+                return Ok();
+
+            return BadRequest($"Updating role for user {assignRoleViewModel.UserName} failed on save.");
+        }
+
     }
 }

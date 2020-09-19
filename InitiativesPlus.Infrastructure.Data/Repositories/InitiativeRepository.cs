@@ -11,7 +11,7 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
 {
     public class InitiativeRepository : IInitiativeRepository
     {
-        public InitiativesPlusDbContext _context;
+        private InitiativesPlusDbContext _context;
         public InitiativeRepository(InitiativesPlusDbContext context)
         {
             _context = context;

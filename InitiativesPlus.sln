@@ -9,9 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.ClientA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.Domain", "InitiativesPlus.99X.Domain", "{827FDECD-7ED2-499A-ACF1-D6B33B76A5C3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.Infrastructure.Data", "InitiativesPlus.99X.Infrastructure.Data", "{BF728E3B-9227-494F-ACA6-BCB52E614A2E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.Infrastructure.IoC", "InitiativesPlus.99X.Infrastructure.IoC", "{5BB6A5F5-CE2C-4136-9860-ECA97E92A8E9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.Infrastructure", "InitiativesPlus.99X.Infrastructure", "{BF728E3B-9227-494F-ACA6-BCB52E614A2E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.Presentation", "InitiativesPlus.99X.Presentation", "{D24991B2-554E-4109-B145-D0C9457E085F}"
 EndProject
@@ -42,9 +40,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitiativesPlus.Domain", "I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitiativesPlus.Infrastructure.Data", "InitiativesPlus.Infrastructure.Data\InitiativesPlus.Infrastructure.Data.csproj", "{C6E0B38A-CE89-4D06-B76A-4C05C0A9190C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitiativesPlus.Application", "InitiativesPlus.Application\InitiativesPlus.Application.csproj", "{B52750FB-F9A2-4BEF-BD76-B4173FB862A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitiativesPlus.Application", "InitiativesPlus.Application\InitiativesPlus.Application.csproj", "{B52750FB-F9A2-4BEF-BD76-B4173FB862A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitiativesPlus.Infrastructure.IoC", "InitiativesPlus.Infrastructure.IoC\InitiativesPlus.Infrastructure.IoC.csproj", "{5C48C0B1-FE76-4B27-BF0D-5D7DC3A15BC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitiativesPlus.Infrastructure.IoC", "InitiativesPlus.Infrastructure.IoC\InitiativesPlus.Infrastructure.IoC.csproj", "{5C48C0B1-FE76-4B27-BF0D-5D7DC3A15BC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitiativesPlus.Infrastructure.EmailService", "InitiativesPlus.Infrastructure.EmailService\InitiativesPlus.Infrastructure.EmailService.csproj", "{1795B947-1856-484E-AF71-064B0757A09D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +75,10 @@ Global
 		{5C48C0B1-FE76-4B27-BF0D-5D7DC3A15BC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C48C0B1-FE76-4B27-BF0D-5D7DC3A15BC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C48C0B1-FE76-4B27-BF0D-5D7DC3A15BC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1795B947-1856-484E-AF71-064B0757A09D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1795B947-1856-484E-AF71-064B0757A09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1795B947-1856-484E-AF71-064B0757A09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1795B947-1856-484E-AF71-064B0757A09D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,7 +89,8 @@ Global
 		{47D777A9-D823-4DB9-A063-6E280F8DC66A} = {827FDECD-7ED2-499A-ACF1-D6B33B76A5C3}
 		{C6E0B38A-CE89-4D06-B76A-4C05C0A9190C} = {BF728E3B-9227-494F-ACA6-BCB52E614A2E}
 		{B52750FB-F9A2-4BEF-BD76-B4173FB862A3} = {A15C3088-502C-4168-BE90-DB1BFE835132}
-		{5C48C0B1-FE76-4B27-BF0D-5D7DC3A15BC9} = {5BB6A5F5-CE2C-4136-9860-ECA97E92A8E9}
+		{5C48C0B1-FE76-4B27-BF0D-5D7DC3A15BC9} = {BF728E3B-9227-494F-ACA6-BCB52E614A2E}
+		{1795B947-1856-484E-AF71-064B0757A09D} = {BF728E3B-9227-494F-ACA6-BCB52E614A2E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C6074634-9110-4666-8A18-D433EE8984EE}

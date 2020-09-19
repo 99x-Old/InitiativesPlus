@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace InitiativesPlus.Presentation.Controllers
 {
     //[Authorize(Roles = "Initiative Lead")]
-    [Authorize(Roles = "Initiative Lead")]
+    [Authorize(Roles = "User")]
     [Route("api/[controller]")]
     [ApiController]
     public class InitiativeController : ControllerBase

@@ -11,7 +11,7 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
 {
     public class AuthRepository : IAuthRepository
     {
-        public InitiativesPlusDbContext _context;
+        private InitiativesPlusDbContext _context;
         public AuthRepository(InitiativesPlusDbContext context)
         {
             _context = context;

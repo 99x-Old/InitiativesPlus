@@ -12,7 +12,7 @@ namespace InitiativesPlus.Application.Services
 {
     public class AuthService : IAuthService
     {
-        public IAuthRepository _authRepository;
+        private IAuthRepository _authRepository;
         private IMapper _mapper;
         public AuthService(IAuthRepository authRepository, IMapper mapper)
         {
@@ -26,18 +26,12 @@ namespace InitiativesPlus.Application.Services
             return _mapper.Map<UserForLoginViewModel>(loginUser);
         }
 
-        public async Task<UserForRegisterViewModel> Register(UserForRegisterViewModel userq)
+        public async Task<UserForRegisterViewModel> Register(UserForRegisterViewModel user)
         {
-            //var userToCreate = new User
-            //{
-            //    Username = userq.Username
-            //};
-
-            var user = _mapper.Map<User>(userq);
-            var createUser = await _authRepository.Register(user, userq.Password);
+            var registerUser = _mapper.Map<User>(user);
+            var createUser = await _authRepository.Register(registerUser, user.Password);
             var userToReturn = _mapper.Map<UserForRegisterViewModel>(createUser);
             return userToReturn;
-            //throw new NotImplementedException();
         }
 
         public async Task<bool> UserExists(string username)

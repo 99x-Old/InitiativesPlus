@@ -11,7 +11,7 @@ namespace InitiativesPlus.Application.Services
 {
     public class InitiativeService : IInitiativeService
     {
-        public IInitiativeRepository _initiativeRepository;
+        private IInitiativeRepository _initiativeRepository;
         private IMapper _mapper;
         public InitiativeService(IInitiativeRepository initiativeRepository, IMapper mapper)
         {
