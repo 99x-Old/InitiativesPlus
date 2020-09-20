@@ -14,5 +14,7 @@ namespace InitiativesPlus.Application.ViewModels
         public string Password { get; set; }
         [Required]
         public int RoleId { get; set; }
+        [Required]
+        public int Email { get; set; }
     }
 }
