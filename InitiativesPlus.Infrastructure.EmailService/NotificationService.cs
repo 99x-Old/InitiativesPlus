@@ -17,7 +17,7 @@ namespace InitiativesPlus.Infrastructure.EmailService
     public class NotificationService : BackgroundService
     {
         private readonly ISubscriptionClient _subscriptionClient;
-        public IServiceScopeFactory _serviceScopeFactory;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
 
         public NotificationService(
             ISubscriptionClient subscriptionClient, 
@@ -51,12 +51,10 @@ namespace InitiativesPlus.Infrastructure.EmailService
                     AutoComplete = false,
                     MaxConcurrentCalls = 1
                 });
-                //scopedProcessingService.DoWork();
             }
 
             return Task.CompletedTask;
         }
-
 
         public class ServiceBusMessage
         {

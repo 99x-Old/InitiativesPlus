@@ -13,6 +13,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardService } from '../../_services/dashboard.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../_services/auth.service';
 
 @NgModule({
   declarations: [
@@ -30,10 +32,13 @@ import { DashboardService } from '../../_services/dashboard.service';
     FlexLayoutModule,
     MatCardModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
-    DashboardService
+    DashboardService,
+    AuthService
   ]
 })
 export class DefaultModule { }

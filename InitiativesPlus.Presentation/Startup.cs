@@ -23,6 +23,8 @@ namespace InitiativesPlus.Presentation
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -37,6 +39,17 @@ namespace InitiativesPlus.Presentation
             {
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection"));
+            });
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200",
+                                            "http://www.contoso.com")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
             });
             services.AddControllers();
             //Adds the localization services to the services container. The code above also sets the resources path to "Resources"
@@ -86,7 +99,7 @@ namespace InitiativesPlus.Presentation
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -28,7 +26,7 @@ namespace InitiativesPlus.Infrastructure.EmailService.Helpers
                 ["from"] = _mailConfigSection.From,
                 ["to"] = to,
                 ["subject"] = subject,
-                ["html"] = body,
+                ["html"] = body
             };
 
             HttpResponseMessage response = await _mailgunHttpClient.PostAsync($"v3/{_mailConfigSection.Domain}/messages", new FormUrlEncodedContent(form));
