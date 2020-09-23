@@ -88,18 +88,20 @@ namespace InitiativesPlus.Presentation
             });
 
 #pragma warning disable S125 // Sections of code should not be commented out
-            //services.AddTransient<Seed>();
+            services.AddTransient<Seed>();
             //InitiativesPlusDbContext context, Seed seeder
             RegisterServices(services);
 #pragma warning restore S125 // Sections of code should not be commented out
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, InitiativesPlusDbContext context, Seed seeder)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                // Seed users
+                seeder.SeedUsers();
             }
 
             app.UseHttpsRedirection();
@@ -109,9 +111,8 @@ namespace InitiativesPlus.Presentation
             // Migrate any database changes on startup (includes initial db creation)
 
 #pragma warning disable S125 // Sections of code should not be commented out
-            // context.Database.Migrate();
-            // Seed users
-            // seeder.SeedUsers();
+            context.Database.Migrate();
+            
 #pragma warning restore S125 // Sections of code should not be commented out
             app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
