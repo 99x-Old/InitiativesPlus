@@ -103,7 +103,7 @@ namespace InitiativesPlus.Presentation
             app.UseRouting();
 
             // Migrate any database changes on startup (includes initial db creation)
-            context.Database.Migrate();
+            // context.Database.Migrate();
             // Seed users
             seeder.SeedUsers();
             app.UseCors(MyAllowSpecificOrigins);
