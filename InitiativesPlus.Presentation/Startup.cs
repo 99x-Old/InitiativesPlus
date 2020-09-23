@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitiativesPlus.Infrastructure.Data.Context;
+using InitiativesPlus.Infrastructure.Data.SeedData;
 using InitiativesPlus.Infrastructure.IoC;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -38,7 +39,7 @@ namespace InitiativesPlus.Presentation
             services.AddDbContext<InitiativesPlusDbContext>(options =>
             {
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection"));
+                    Configuration.GetConnectionString("AzureConnection"));
             });
             services.AddCors(options =>
             {
@@ -85,11 +86,12 @@ namespace InitiativesPlus.Presentation
                     ValidateAudience = false
                 };
             });
+            services.AddTransient<Seed>();
             RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, InitiativesPlusDbContext context, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -99,6 +101,11 @@ namespace InitiativesPlus.Presentation
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            // Migrate any database changes on startup (includes initial db creation)
+            context.Database.Migrate();
+            // Seed users
+            seeder.SeedUsers();
             app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
             app.UseAuthorization();

@@ -1,0 +1,26 @@
+[
+  {
+    "Username": "user",
+    "RoleId": 1,
+    "Email": "inbox.nishan@gmail.com",
+    "Password": "password"
+  },
+  {
+    "Username": "initiativelead",
+    "RoleId": 2,
+    "Email": "nishanw@99x.io",
+    "Password": "password"
+  },
+  {
+    "Username": "superadmin",
+    "RoleId": 3,
+    "Email": "",
+    "Password": "password"
+  },
+  {
+    "Username": "evaluator",
+    "RoleId": 4,
+    "Email": "",
+    "Password": "password"
+  }
+]
