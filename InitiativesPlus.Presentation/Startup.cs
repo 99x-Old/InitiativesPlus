@@ -47,7 +47,7 @@ namespace InitiativesPlus.Presentation
                     builder =>
                     {
                         builder.WithOrigins("http://localhost:4200",
-                                            "http://www.contoso.com")
+                                            "https://initiatives-plus-spa.azurewebsites.net")
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                     });
