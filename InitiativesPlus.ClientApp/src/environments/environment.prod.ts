@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://initiatives-plus-api.azurewebsites.net/api/'
 };

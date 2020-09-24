@@ -3,35 +3,41 @@ import { Injectable } from '@angular/core';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { UserForLogin } from '../_models/UserForLogin';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = 'https://localhost:44380/api/user/';
-
+  baseUrl = environment.apiUrl;
+  decodedToken: any;
+  helper = new JwtHelperService();
+  token: string;
   constructor(private http: HttpClient) { }
 
   login(model: UserForLogin) {
-    console.log("model", model);
     const headers = new HttpHeaders({'Content-type': 'application/json'});
     const options = { headers };
-    return this.http.post<UserForLogin>(this.baseUrl + 'login', model, options)
+    return this.http.post<any>(this.baseUrl + 'user/login', model, options)
     .pipe(map(response => {
       const user = response;
-      // if (user) {
-      //   localStorage.setItem('token', user.access_token);
-      //   localStorage.setItem('user', user.userName);
-      //   localStorage.setItem('isAdmin', user.roles.includes(this.adminString));
-      //   this.userToken = user.access_token;
-      //   this.isAdmin = user.roles.includes(this.adminString);
-      //   this.userName = user.userName;
-      //}
-      console.log(user);
+
+      localStorage.setItem('token', user.tokenString);
+      this.decodedToken  = this.helper.decodeToken(user.tokenString);
+      localStorage.setItem('role', user.tokenString.role);
     }))
     .pipe(
       catchError(this.handleError)
     );
+  }
+
+  loggedIn() {
+    return !this.helper.isTokenExpired(this.getToken());
+  }
+
+  getToken(){
+    return localStorage.getItem('token');
   }
 
   private handleError(error: any) {

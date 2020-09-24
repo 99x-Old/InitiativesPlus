@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserForLogin } from "../../_models/UserForLogin";
 import { UserForRegister } from "../../_models/UserForRegister";
 import { AuthService } from "../../_services/auth.service";
@@ -15,7 +17,7 @@ export class HomeComponent implements OnInit {
   userForRegister: UserForRegister;
   loginRegisterToggle: boolean = true;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -34,24 +36,14 @@ export class HomeComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       this.user = Object.assign({}, this.loginForm.value);
-      console.log(this.user);
       this.authService.login(this.user).subscribe(data => {
-        //this.alertify.success('logged in');
-        console.log(data);
+        this.toastr.success('Logged in!', '');
+        console.log(this.authService.loggedIn());
       }, error => {
-        //this.alertify.error(error);
+        this.toastr.error(error)
       }, () => {
-        //this.router.navigate(['/home']);
+        this.router.navigate(['/dashboard']);
       });
-      // this.authService.register(this.user).subscribe(() => {
-      //   this.alertify.success('Registration Succesful');
-      // }, error => {
-      //   this.alertify.error(error);
-      // }, () => {
-      //   this.authService.login(this.user).subscribe(() => {
-      //     this.router.navigate(['/members']);
-      //   });
-      // });
     }
   }
 
@@ -72,15 +64,6 @@ export class HomeComponent implements OnInit {
       this.userForRegister.roleId = 1;
       console.log(this.userForRegister);
 
-      // this.authService.register(this.user).subscribe(() => {
-      //   this.alertify.success('Registration Succesful');
-      // }, error => {
-      //   this.alertify.error(error);
-      // }, () => {
-      //   this.authService.login(this.user).subscribe(() => {
-      //     this.router.navigate(['/members']);
-      //   });
-      // });
     }
   }
 
