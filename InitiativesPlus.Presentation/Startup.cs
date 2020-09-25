@@ -25,6 +25,7 @@ namespace InitiativesPlus.Presentation
     public class Startup
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        readonly string MyAllowAnyOrigin = "_myAllowAnyOrigin";
 
         public Startup(IConfiguration configuration)
         {
@@ -50,6 +51,13 @@ namespace InitiativesPlus.Presentation
                                             "https://initiatives-plus-spa.azurewebsites.net")
                             .AllowAnyHeader()
                             .AllowAnyMethod();
+                    });
+                options.AddPolicy(name: MyAllowAnyOrigin,
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
                     });
             });
             services.AddControllers();
@@ -108,7 +116,7 @@ namespace InitiativesPlus.Presentation
             // Migrate any database changes on startup (includes initial db creation)
             context.Database.Migrate();
             
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors(MyAllowAnyOrigin);
             app.UseAuthentication();
             app.UseAuthorization();
 
