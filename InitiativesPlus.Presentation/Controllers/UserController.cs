@@ -7,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using InitiativesPlus.Application.Interfaces;
 using InitiativesPlus.Application.ViewModels;
+using InitiativesPlus.Infrastructure.Data.StaticClasses;
 using InitiativesPlus.Presentation.Resources;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -77,6 +79,7 @@ namespace InitiativesPlus.Presentation.Controllers
         }
 
         [HttpPut("assign-role")]
+        [Authorize(Roles = RoleTypes.SuperAdmin)]
         public async Task<IActionResult> AssignRole([FromBody] AssignRoleViewModel assignRoleViewModel)
         {
             if (!ModelState.IsValid)
@@ -91,5 +94,12 @@ namespace InitiativesPlus.Presentation.Controllers
             return BadRequest($"Updating role for user {assignRoleViewModel.UserName} failed on save.");
         }
 
+        [HttpGet("list-roles")]
+        [Authorize(Roles = RoleTypes.SuperAdmin)]
+        public async Task<IActionResult> GetListOfRoles()
+        {
+            var roles = await _userService.GetRolesAsync();
+            return Ok(roles);
+        }
     }
 }

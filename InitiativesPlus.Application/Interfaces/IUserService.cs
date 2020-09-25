@@ -9,5 +9,6 @@ namespace InitiativesPlus.Application.Interfaces
     public interface IUserService
     {
         Task<bool> AssignRoleAsync(AssignRoleViewModel assignRoleViewModel);
+        Task<List<string>> GetRolesAsync();
     }
 }

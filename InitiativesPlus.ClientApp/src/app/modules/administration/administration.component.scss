@@ -1,0 +1,17 @@
+mat-grid-tile {
+    background: #f1f1f1;
+}
+
+.example-container .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+}
+
+.example-card {
+    max-width: 600px;
+  }
+  
+  mat-icon.mat-card-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+  }

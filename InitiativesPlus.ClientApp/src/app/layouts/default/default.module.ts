@@ -15,13 +15,22 @@ import { MatTableModule } from '@angular/material/table';
 import { DashboardService } from '../../_services/dashboard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
+import { AdministrationComponent } from 'src/app/modules/administration/administration.component';
+import {MatGridListModule} from '@angular/material/grid-list'
+import { MatFormField, MatFormFieldModule, MatHint, MatLabel } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from "@angular/material/input";
+import { UserService } from 'src/app/_services/user.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     DefaultComponent,
     DashboardComponent,
     HomeComponent,
-    InitiativesComponent
+    InitiativesComponent,
+    AdministrationComponent
   ],
   imports: [
     CommonModule,
@@ -34,11 +43,18 @@ import { AuthService } from '../../_services/auth.service';
     MatPaginatorModule,
     MatTableModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [
     DashboardService,
-    AuthService
+    AuthService,
+    UserService
   ]
 })
 export class DefaultModule { }

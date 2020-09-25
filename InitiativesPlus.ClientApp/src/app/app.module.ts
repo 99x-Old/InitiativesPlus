@@ -8,6 +8,8 @@ import { DefaultModule } from './layouts/default/default.module';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthGuard } from "./_guards/auth.guard";
+import { AuthService } from './_services/auth.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,10 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     NgHttpLoaderModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

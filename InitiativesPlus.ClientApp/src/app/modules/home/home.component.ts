@@ -31,14 +31,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  create
-
   login() {
     if (this.loginForm.valid) {
       this.user = Object.assign({}, this.loginForm.value);
       this.authService.login(this.user).subscribe(data => {
         this.toastr.success('Logged in!', '');
-        console.log(this.authService.loggedIn());
       }, error => {
         this.toastr.error(error)
       }, () => {
@@ -63,7 +60,13 @@ export class HomeComponent implements OnInit {
       this.userForRegister = Object.assign({}, this.registerForm.value);
       this.userForRegister.roleId = 1;
       console.log(this.userForRegister);
-
+      this.authService.register(this.userForRegister).subscribe(data => {
+        this.toastr.success('Registered successfully!', '');
+      }, error => {
+        this.toastr.error(error)
+      }, () => {
+        window.location.reload();
+      });
     }
   }
 

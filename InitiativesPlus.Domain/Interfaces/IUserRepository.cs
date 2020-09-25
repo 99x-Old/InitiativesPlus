@@ -9,5 +9,6 @@ namespace InitiativesPlus.Domain.Interfaces
     public interface IUserRepository
     {
         Task<bool> AssignRoleAsync(string username, int role);
+        Task<List<UserRole>> GetRolesAsync();
     }
 }
