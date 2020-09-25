@@ -6,10 +6,10 @@
           <mat-card-subtitle>Use this to assign new roles to existing users</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+          <mat-form-field appearance="fill">
             <mat-label>Username</mat-label>
-            <input [(ngModel)]="selectedUser" matInput #input maxlength="10" placeholder="Ex. Nougat">
-            <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+            <input [(ngModel)]="selectedUser" matInput #input placeholder="Username">
+            <!-- <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint> -->
           </mat-form-field>
         
           <mat-form-field appearance="fill">
