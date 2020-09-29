@@ -7,8 +7,8 @@ namespace InitiativesPlus.Domain.Interfaces
 {
     public interface IInitiativeRepository
     {
-        Task<List<Initiative>> GetInitiatives();
-        Task<Initiative> GetInitiative(int id);
+        Task<List<Initiative>> GetInitiativesAsync();
+        Task<Initiative> GetInitiativeAsync(int id);
         Task<bool> JoinInitiativeAsync(int id, int userId);
     }
 }

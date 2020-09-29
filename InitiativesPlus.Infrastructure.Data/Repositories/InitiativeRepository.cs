@@ -17,12 +17,12 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
         {
             _context = context;
         }
-        public async Task<List<Initiative>> GetInitiatives()
+        public async Task<List<Initiative>> GetInitiativesAsync()
         {
             return await _context.Initiatives.ToListAsync();
         }
 
-        public async Task<Initiative> GetInitiative(int id)
+        public async Task<Initiative> GetInitiativeAsync(int id)
         {
             return await _context.Initiatives.FirstOrDefaultAsync(x => x.Id == id);
         }        

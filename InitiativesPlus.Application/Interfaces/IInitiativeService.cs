@@ -8,8 +8,8 @@ namespace InitiativesPlus.Application.Interfaces
 {
     public interface IInitiativeService
     {
-        Task<IEnumerable<InitiativeViewModel>> GetInitiatives();
-        Task<InitiativeViewModel> GetInitiative(int id);
-        Task<bool> JoinInitiative(int id, int userId);
+        Task<IEnumerable<InitiativeViewModel>> GetInitiativesAsync();
+        Task<InitiativeViewModel> GetInitiativeAsync(int id);
+        Task<bool> JoinInitiativeAsync(int id, int userId);
     }
 }

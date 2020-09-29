@@ -18,21 +18,21 @@ namespace InitiativesPlus.Application.Services
             _initiativeRepository = initiativeRepository;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<InitiativeViewModel>> GetInitiatives()
+        public async Task<IEnumerable<InitiativeViewModel>> GetInitiativesAsync()
         {
-            var initiatives = await _initiativeRepository.GetInitiatives();
+            var initiatives = await _initiativeRepository.GetInitiativesAsync();
             var initiaviveToReturn = _mapper.Map<IEnumerable<InitiativeViewModel>>(initiatives);
             return initiaviveToReturn;
         }
 
-        public async Task<InitiativeViewModel> GetInitiative(int id)
+        public async Task<InitiativeViewModel> GetInitiativeAsync(int id)
         {
-            var initiatives = await _initiativeRepository.GetInitiative(id);
+            var initiatives = await _initiativeRepository.GetInitiativeAsync(id);
             var initiaviveToReturn = _mapper.Map<InitiativeViewModel>(initiatives);
             return initiaviveToReturn;
         }        
         
-        public async Task<bool> JoinInitiative(int id, int userId)
+        public async Task<bool> JoinInitiativeAsync(int id, int userId)
         {
             return await _initiativeRepository.JoinInitiativeAsync(id, userId);
         }

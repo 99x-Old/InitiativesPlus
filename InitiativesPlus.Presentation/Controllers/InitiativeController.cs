@@ -27,7 +27,7 @@ namespace InitiativesPlus.Presentation.Controllers
         [Route("GetInitiatives")]
         public async Task<IActionResult> GetInitiatives()
         {
-            var initiatives = await _initiativeService.GetInitiatives();
+            var initiatives = await _initiativeService.GetInitiativesAsync();
             return Ok(initiatives);
         }
 
@@ -35,7 +35,7 @@ namespace InitiativesPlus.Presentation.Controllers
         [Route("GetInitiatives/{id}")]
         public async Task<IActionResult> GetInitiative(int id)
         {
-            var initiative = await _initiativeService.GetInitiative(id);
+            var initiative = await _initiativeService.GetInitiativeAsync(id);
             if (initiative == null)
             {
                 return NotFound();
@@ -48,7 +48,7 @@ namespace InitiativesPlus.Presentation.Controllers
         public async Task<IActionResult> JoinInitiative(int id)
         {
             int userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            await _initiativeService.JoinInitiative(id, userId);
+            await _initiativeService.JoinInitiativeAsync(id, userId);
             return Ok();
         }
     }
