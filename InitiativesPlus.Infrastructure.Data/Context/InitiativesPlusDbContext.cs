@@ -15,6 +15,7 @@ namespace InitiativesPlus.Infrastructure.Data.Context
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<UserStatus> UserStatuses { get; set; }
         public DbSet<InitiativeYear> InitiativeYears { get; set; }
+        public DbSet<UserInitiative> UserInitiatives { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

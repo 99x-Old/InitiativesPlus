@@ -27,6 +27,34 @@ export class InitiativesService {
     );
   }
 
+  getInitiative(id: number) {
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      }
+    );
+    const options = { headers };
+    return this.http.get<InitiativesForList>(this.baseUrl + 'Initiative/GetInitiatives/' + id, options)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  joinInitiative(id: number){
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      }
+    );
+    const options = { headers };
+    return this.http.get<any>(this.baseUrl + 'Initiative/Join/' + id, options)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: any) {
     const applicationError = error.error.error_description;
     if (applicationError) {

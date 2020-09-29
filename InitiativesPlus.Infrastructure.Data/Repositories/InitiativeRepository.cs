@@ -4,6 +4,7 @@ using InitiativesPlus.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,22 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
         public async Task<List<Initiative>> GetInitiatives()
         {
             return await _context.Initiatives.ToListAsync();
+        }
+
+        public async Task<Initiative> GetInitiative(int id)
+        {
+            return await _context.Initiatives.FirstOrDefaultAsync(x => x.Id == id);
+        }        
+        
+        public async Task<bool> JoinInitiativeAsync(int id, int userId)
+        {
+            await _context.UserInitiatives.AddAsync(new UserInitiative
+            {
+                InitiativeId = id,
+                UserId = userId
+            });
+
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

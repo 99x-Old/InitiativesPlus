@@ -9,5 +9,7 @@ namespace InitiativesPlus.Application.Interfaces
     public interface IInitiativeService
     {
         Task<IEnumerable<InitiativeViewModel>> GetInitiatives();
+        Task<InitiativeViewModel> GetInitiative(int id);
+        Task<bool> JoinInitiative(int id, int userId);
     }
 }

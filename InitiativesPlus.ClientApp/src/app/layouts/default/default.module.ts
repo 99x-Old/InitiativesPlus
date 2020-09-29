@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { DataTablesModule } from 'angular-datatables';
 import { InitiativeComponent } from '../../modules/initiative/initiative.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { InitiativeComponent } from '../../modules/initiative/initiative.compone
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    DataTablesModule
+    DataTablesModule,
+    MatTooltipModule
   ],
   providers: [
     DashboardService,

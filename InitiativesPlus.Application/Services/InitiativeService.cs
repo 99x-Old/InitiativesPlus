@@ -24,5 +24,17 @@ namespace InitiativesPlus.Application.Services
             var initiaviveToReturn = _mapper.Map<IEnumerable<InitiativeViewModel>>(initiatives);
             return initiaviveToReturn;
         }
+
+        public async Task<InitiativeViewModel> GetInitiative(int id)
+        {
+            var initiatives = await _initiativeRepository.GetInitiative(id);
+            var initiaviveToReturn = _mapper.Map<InitiativeViewModel>(initiatives);
+            return initiaviveToReturn;
+        }        
+        
+        public async Task<bool> JoinInitiative(int id, int userId)
+        {
+            return await _initiativeRepository.JoinInitiativeAsync(id, userId);
+        }
     }
 }

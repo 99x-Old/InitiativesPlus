@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     }
 
     this.toastr.error('You don\'t have permissoin to view this');
-    this.router.navigate(['/home']);
+    this.authService.logOut();
     return false;
   }
   

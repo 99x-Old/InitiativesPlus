@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnInit, Renderer2  } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { subscribeOn } from 'rxjs/operators';
 import { InitiativesForList } from 'src/app/_models/InitiativesForList';
 import { InitiativesService } from 'src/app/_services/initiatives.service';
@@ -11,17 +13,19 @@ import { InitiativesService } from 'src/app/_services/initiatives.service';
   styleUrls: ['./initiatives.component.scss']
 })
 export class InitiativesComponent implements OnInit {
-  listOfInitiatives: InitiativesForList[];
+  listOfInitiatives: InitiativesForList[] = [];
+  dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
   constructor(private initiativeService: InitiativesService, private toastr: ToastrService, private renderer: Renderer2, private router: Router) { }
 
   ngOnInit(): void {
+    this.listOfInitiatives = [];
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
       processing: true
     };
-    this.listOfInitiatives = [];
     this.getListOfInitiatives();
   }
 
@@ -29,6 +33,7 @@ export class InitiativesComponent implements OnInit {
     this.initiativeService.getListOfInitiatives()
     .subscribe(data => {
       this.listOfInitiatives = data;
+      this.dtTrigger.next();
       console.log(this.listOfInitiatives)
       //this.toastr.success("User role changed successfully.")
     }, error => {
