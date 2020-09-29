@@ -1,1 +1,12 @@
-<p>initiatives works!</p>
+<table datatable [dtOptions]="dtOptions" class="row-border hover">
+    <thead>
+      <tr>
+        <th>Currunt Initiatives</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let initiative of listOfInitiatives">
+        <td (click)="navigate(initiative.id)">{{ initiative.name }}</td>
+      </tr>
+    </tbody>
+  </table>

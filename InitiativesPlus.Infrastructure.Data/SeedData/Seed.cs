@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using InitiativesPlus.Domain.Models;
 using InitiativesPlus.Infrastructure.Data.Context;
@@ -18,26 +19,44 @@ namespace InitiativesPlus.Infrastructure.Data.SeedData
 
         public void SeedUsers()
         {
-            _context.Users.RemoveRange(_context.Users);
-            _context.SaveChanges();
-
-            //Seed users
             var userData = System.IO.File.ReadAllText("../InitiativesPlus.Infrastructure.Data/SeedData/UserSeedData.json");
             var users = JsonConvert.DeserializeObject<List<User>>(userData);
-            foreach (var user in users)
+
+            var initiativeData = System.IO.File.ReadAllText("../InitiativesPlus.Infrastructure.Data/SeedData/InitiativeSeedData.json");
+            var initiatives = JsonConvert.DeserializeObject<List<Initiative>>(initiativeData);
+
+            var userRecordsInDb = users.Where(x => _context.Users.Any(z => z.Username == x.Username)).ToList();
+            var initiativeRecordsInDb = initiatives.Where(x => !_context.Initiatives.Any(z => z.Name == x.Name)).ToList();
+
+            if (userRecordsInDb == null)
             {
-                //Create password
-                byte[] passwordHash, passwordSalt;
-                CreatePasswordHash("password", out passwordHash, out passwordSalt);
+                //Seed users
 
-                user.PasswordHash = passwordHash;
-                user.PasswordSalt = passwordSalt;
+                foreach (var user in users)
+                {
+                    //Create password
+                    byte[] passwordHash, passwordSalt;
+                    CreatePasswordHash("password", out passwordHash, out passwordSalt);
 
-                user.Username = user.Username.ToLower();
+                    user.PasswordHash = passwordHash;
+                    user.PasswordSalt = passwordSalt;
 
-                _context.Users.Add(user);
+                    user.Username = user.Username.ToLower();
+
+                    _context.Users.Add(user);
+                }
             }
-            _context.SaveChanges();
+
+            if (initiativeRecordsInDb == null)
+            {
+                //Seed Initiatives
+
+                foreach (var initiative in initiatives)
+                {
+                    _context.Initiatives.Add(initiative);
+                }
+                _context.SaveChanges();
+            }
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

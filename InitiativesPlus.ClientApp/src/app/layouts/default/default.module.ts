@@ -13,9 +13,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardService } from '../../_services/dashboard.service';
+import { InitiativesService } from '../../_services/initiatives.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
-import { AdministrationComponent } from 'src/app/modules/administration/administration.component';
+import { AdministrationComponent } from '../../modules/administration/administration.component';
 import {MatGridListModule} from '@angular/material/grid-list'
 import { MatFormField, MatFormFieldModule, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -23,6 +24,8 @@ import { MatInputModule } from "@angular/material/input";
 import { UserService } from 'src/app/_services/user.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { DataTablesModule } from 'angular-datatables';
+import { InitiativeComponent } from '../../modules/initiative/initiative.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { MatButtonModule } from '@angular/material/button';
     DashboardComponent,
     HomeComponent,
     InitiativesComponent,
-    AdministrationComponent
+    AdministrationComponent,
+    InitiativeComponent
   ],
   imports: [
     CommonModule,
@@ -49,12 +53,14 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    DataTablesModule
   ],
   providers: [
     DashboardService,
     AuthService,
-    UserService
+    UserService,
+    InitiativesService
   ]
 })
 export class DefaultModule { }

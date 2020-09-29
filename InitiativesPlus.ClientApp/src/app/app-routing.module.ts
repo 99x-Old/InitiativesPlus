@@ -4,6 +4,7 @@ import { DefaultComponent } from './layouts/default/default.component';
 import { AdministrationComponent } from './modules/administration/administration.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { HomeComponent } from './modules/home/home.component';
+import { InitiativeComponent } from './modules/initiative/initiative.component';
 import { InitiativesComponent } from './modules/initiatives/initiatives.component';
 import { AuthGuard } from './_guards/auth.guard';
 
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: 'initiatives',
         component: InitiativesComponent
+      },
+      {
+        path: 'initiative/:id',
+        component: InitiativeComponent
       },
       {
         path: 'administration',

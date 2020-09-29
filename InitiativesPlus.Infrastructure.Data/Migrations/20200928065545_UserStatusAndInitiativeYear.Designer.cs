@@ -4,14 +4,16 @@ using InitiativesPlus.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InitiativesPlus.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(InitiativesPlusDbContext))]
-    partial class InitiativesPlusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200928065545_UserStatusAndInitiativeYear")]
+    partial class UserStatusAndInitiativeYear
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,21 +85,6 @@ namespace InitiativesPlus.Infrastructure.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("InitiativesPlus.Domain.Models.UserInitiative", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("InitiativeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "InitiativeId");
-
-                    b.HasIndex("InitiativeId");
-
-                    b.ToTable("UserInitiative");
-                });
-
             modelBuilder.Entity("InitiativesPlus.Domain.Models.UserRole", b =>
                 {
                     b.Property<int>("Id")
@@ -148,21 +135,6 @@ namespace InitiativesPlus.Infrastructure.Data.Migrations
                     b.HasOne("InitiativesPlus.Domain.Models.UserStatus", "UserStatus")
                         .WithMany("Users")
                         .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("InitiativesPlus.Domain.Models.UserInitiative", b =>
-                {
-                    b.HasOne("InitiativesPlus.Domain.Models.Initiative", "Initiative")
-                        .WithMany()
-                        .HasForeignKey("InitiativeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InitiativesPlus.Domain.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

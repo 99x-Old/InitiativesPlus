@@ -4,10 +4,10 @@ using System.Text;
 
 namespace InitiativesPlus.Domain.Models
 {
-    public class Initiative
+    public class UserStatus
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<InitiativeYear> InitiativeYears { get; set; }
+        public string Status { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }

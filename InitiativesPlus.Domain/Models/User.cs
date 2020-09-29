@@ -13,5 +13,7 @@ namespace InitiativesPlus.Domain.Models
         public string Email { get; set; }
         public int RoleId { get; set; }
         public UserRole UserRole { get; set; }
+        public int StatusId { get; set; }
+        public UserStatus UserStatus { get; set; }
     }
 }

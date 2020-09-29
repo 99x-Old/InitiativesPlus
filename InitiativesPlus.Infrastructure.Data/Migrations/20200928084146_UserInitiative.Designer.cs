@@ -4,14 +4,16 @@ using InitiativesPlus.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InitiativesPlus.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(InitiativesPlusDbContext))]
-    partial class InitiativesPlusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200928084146_UserInitiative")]
+    partial class UserInitiative
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

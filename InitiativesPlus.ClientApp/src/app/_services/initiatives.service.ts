@@ -1,34 +1,19 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { ChangeRole } from "../_models/ChangeRole";
+import { InitiativesForList } from "../_models/InitiativesForList";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class InitiativesService {
   baseUrl = environment.apiUrl;
   token: string = localStorage.getItem('token');
-constructor(private http: HttpClient, private router: Router) { }
-  gerListOfRoles(){
-    const headers = new HttpHeaders(
-      {
-        'Content-type': 'application/json',
-        'Authorization': 'Bearer '+this.token
-      }
-    );
-    const options = { headers };
-    return this.http.get<any>(this.baseUrl + 'user/list-roles', options)
-    .pipe(
-      catchError(this.handleError)
-    );
-  }
+  constructor(private http: HttpClient) { }
 
-  changeUserRole(model: ChangeRole){
-    //console.log("model", model);
+  getListOfInitiatives() {
     const headers = new HttpHeaders(
       {
         'Content-type': 'application/json',
@@ -36,9 +21,7 @@ constructor(private http: HttpClient, private router: Router) { }
       }
     );
     const options = { headers };
-    return this.http.put<any>(this.baseUrl + 'user/assign-role', model, options)
-    .pipe(map(response => {
-    }))
+    return this.http.get<InitiativesForList[]>(this.baseUrl + 'Initiative/GetInitiatives', options)
     .pipe(
       catchError(this.handleError)
     );
