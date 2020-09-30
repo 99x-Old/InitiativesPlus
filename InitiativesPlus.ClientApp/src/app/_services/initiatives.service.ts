@@ -13,7 +13,7 @@ export class InitiativesService {
   token: string = localStorage.getItem('token');
   constructor(private http: HttpClient) { }
 
-  getListOfInitiatives() {
+  getListOfInitiatives(filter?: string) {
     const headers = new HttpHeaders(
       {
         'Content-type': 'application/json',
@@ -21,7 +21,7 @@ export class InitiativesService {
       }
     );
     const options = { headers };
-    return this.http.get<InitiativesForList[]>(this.baseUrl + 'Initiative/GetInitiatives', options)
+    return this.http.get<InitiativesForList[]>(this.baseUrl + 'Initiative/GetInitiatives?filter=' + filter, options)
     .pipe(
       catchError(this.handleError)
     );
@@ -35,7 +35,35 @@ export class InitiativesService {
       }
     );
     const options = { headers };
-    return this.http.get<InitiativesForList>(this.baseUrl + 'Initiative/GetInitiatives/' + id, options)
+    return this.http.get<InitiativesForList>(this.baseUrl + 'Initiative/GetInitiative/' + id, options)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  removeUser(id: number, userId: number) {
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      }
+    );
+    const options = { headers };
+    return this.http.delete(this.baseUrl + 'initiative/remove-user/' + id + '/' + userId, options)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  removeCurruntUser(id: number) {
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      }
+    );
+    const options = { headers };
+    return this.http.delete(this.baseUrl + 'initiative/remove-me/' + id, options)
     .pipe(
       catchError(this.handleError)
     );
@@ -56,6 +84,7 @@ export class InitiativesService {
   }
 
   private handleError(error: any) {
+    console.log(error)
     const applicationError = error.error.error_description;
     if (applicationError) {
       return throwError(applicationError);

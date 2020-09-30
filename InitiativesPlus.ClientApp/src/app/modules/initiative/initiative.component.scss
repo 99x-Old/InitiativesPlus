@@ -29,3 +29,12 @@ section {
     justify-content: center;
     width: 120px;
   }
+  
+  section
+  {
+      /* display: inlineblock; */ /* remove this */
+      margin:auto;
+  }
+  .container{
+    text-align: center;
+  }

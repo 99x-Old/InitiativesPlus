@@ -17,7 +17,7 @@ export class InitiativeComponent implements OnInit {
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
-      console.log(this.id)
+      //console.log(this.id)
       this.initiativesService.getInitiative(this.id)
       .subscribe(data => {
         this.initiative = data;
@@ -34,6 +34,15 @@ export class InitiativeComponent implements OnInit {
     this.initiativesService.joinInitiative(this.id)
     .subscribe(data => {
       this.toastr.success("You're now a member of "+this.initiative.name)
+    }, error => {
+      this.toastr.error(error)
+    });
+  }
+
+  leaveInitiative(){
+    this.initiativesService.removeCurruntUser(this.id)
+    .subscribe(data => {
+      this.toastr.success("You have left "+this.initiative.name)
     }, error => {
       this.toastr.error(error)
     });

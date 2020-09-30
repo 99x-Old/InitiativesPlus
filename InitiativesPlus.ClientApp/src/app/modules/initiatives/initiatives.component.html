@@ -9,4 +9,17 @@
         <td (click)="navigate(initiative.id)">{{ initiative.name }}</td>
       </tr>
     </tbody>
-  </table>
+</table><br>
+<mat-divider></mat-divider><br>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger2" class="row-border hover">
+  <thead>
+    <tr>
+      <th>My Initiatives</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let initiative of listOfMyInitiatives">
+      <td (click)="navigate(initiative.id)">{{ initiative.name }}</td>
+    </tr>
+  </tbody>
+</table>

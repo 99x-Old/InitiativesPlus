@@ -16,6 +16,7 @@ namespace InitiativesPlus.Infrastructure.Data.Context
         public DbSet<UserStatus> UserStatuses { get; set; }
         public DbSet<InitiativeYear> InitiativeYears { get; set; }
         public DbSet<UserInitiative> UserInitiatives { get; set; }
+        public DbSet<InitiativeStatus> InitiativeStatuses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +28,11 @@ namespace InitiativesPlus.Infrastructure.Data.Context
             modelBuilder.Entity<User>()
                 .HasOne(a => a.UserStatus)
                 .WithMany(b => b.Users)
+                .HasForeignKey(a => a.StatusId);
+
+            modelBuilder.Entity<Initiative>()
+                .HasOne(a => a.InitiativeStatus)
+                .WithMany(b => b.Initiatives)
                 .HasForeignKey(a => a.StatusId);
 
             modelBuilder.Entity<InitiativeYear>()
