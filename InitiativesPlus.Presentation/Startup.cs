@@ -40,7 +40,7 @@ namespace InitiativesPlus.Presentation
             services.AddDbContext<InitiativesPlusDbContext>(options =>
             {
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection"));
+                    Configuration.GetConnectionString("AzureConnection"));
             });
             services.AddCors(options =>
             {

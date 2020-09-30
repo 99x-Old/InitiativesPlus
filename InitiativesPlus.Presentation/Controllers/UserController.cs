@@ -46,7 +46,7 @@ namespace InitiativesPlus.Presentation.Controllers
             if (await _authService.UserExists(userForRegister.Username))
                 return BadRequest(_errorLocalizer["UserExists"].Value);
 
-            var createUser = await _authService.Register(userForRegister);
+            await _authService.Register(userForRegister);
 
             return StatusCode(201);
         }
@@ -86,12 +86,12 @@ namespace InitiativesPlus.Presentation.Controllers
                 return BadRequest(ModelState);
 
             if (!await _authService.UserExists(assignRoleViewModel.UserName))
-                return NotFound($"Could not find user with an username of {assignRoleViewModel.UserName}");
+                return NotFound(string.Format(_errorLocalizer["UserNotExist"].Value, assignRoleViewModel.UserName));
 
             if (await _userService.AssignRoleAsync(assignRoleViewModel))
                 return Ok();
-
-            return BadRequest($"Updating role for user {assignRoleViewModel.UserName} failed on save.");
+            
+            return BadRequest(string.Format(_errorLocalizer["FailedRoleUpdate"].Value, assignRoleViewModel.UserName));
         }
 
         [HttpGet("list-roles")]

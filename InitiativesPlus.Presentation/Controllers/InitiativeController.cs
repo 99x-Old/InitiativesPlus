@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using InitiativesPlus.Application.Interfaces;
 using InitiativesPlus.Application.ViewModels;
 using InitiativesPlus.Infrastructure.Data.StaticClasses;
+using InitiativesPlus.Presentation.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace InitiativesPlus.Presentation.Controllers
 {
@@ -19,10 +21,12 @@ namespace InitiativesPlus.Presentation.Controllers
     public class InitiativeController : ControllerBase
     {
         private readonly IInitiativeService _initiativeService;
+        private readonly IStringLocalizer<ErrorStrings> _errorLocalizer;
 
-        public InitiativeController(IInitiativeService initiativeService)
+        public InitiativeController(IInitiativeService initiativeService, IStringLocalizer<ErrorStrings> errorLocalizer)
         {
             _initiativeService = initiativeService;
+            _errorLocalizer = errorLocalizer;
         }
 
         [HttpGet]
@@ -61,7 +65,7 @@ namespace InitiativesPlus.Presentation.Controllers
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             if (await _initiativeService.UserExistsInInitiativeAsync(id, userId))
             {
-                return BadRequest("You're already a member of this initiative");
+                return BadRequest(string.Format(_errorLocalizer["AlreadyInInitiative"].Value));
             }
             await _initiativeService.JoinInitiativeAsync(id, userId);
             return Ok();
@@ -98,7 +102,7 @@ namespace InitiativesPlus.Presentation.Controllers
             int userToRemove = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             if (!await _initiativeService.UserExistsInInitiativeAsync(id, userToRemove))
             {
-                return BadRequest("You're not a member of this initiative.");
+                return BadRequest(string.Format(_errorLocalizer["UserNotInInitiative"].Value));
             }
             bool success = await _initiativeService.RemoveUserFromInitiativeAsync(id, userToRemove);
             return Ok(success);
