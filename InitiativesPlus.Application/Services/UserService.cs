@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using InitiativesPlus.Application.Interfaces;
@@ -22,12 +20,23 @@ namespace InitiativesPlus.Application.Services
         public async Task<bool> AssignRoleAsync(AssignRoleViewModel assignRoleViewModel)
         {
             return await _userRepository.AssignRoleAsync(assignRoleViewModel.UserName, assignRoleViewModel.NewRole);
+        }        
+        
+        public async Task<bool> ChangeStatusAsync(ChangeUserStatusViewModel changeUserStatusViewModel)
+        {
+            return await _userRepository.ChangeStatusAsync(changeUserStatusViewModel.UserName, changeUserStatusViewModel.NewStatus);
         }
 
         public async Task<List<string>> GetRolesAsync()
         {
             var users = await _userRepository.GetRolesAsync();
             return users.Select(x => x.RoleName).ToList();
+        }
+
+        public async Task<List<string>> GetStatusAsync()
+        {
+            var statuses = await _userRepository.GetStatusAsync();
+            return statuses.Select(x => x.Status).ToList();
         }
     }
 }

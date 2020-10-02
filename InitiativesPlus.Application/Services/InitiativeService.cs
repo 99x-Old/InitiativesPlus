@@ -2,9 +2,7 @@
 using InitiativesPlus.Application.Interfaces;
 using InitiativesPlus.Application.ViewModels;
 using InitiativesPlus.Domain.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InitiativesPlus.Application.Services

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using InitiativesPlus.Domain.Models;
 
@@ -10,5 +8,7 @@ namespace InitiativesPlus.Domain.Interfaces
     {
         Task<bool> AssignRoleAsync(string username, int role);
         Task<List<UserRole>> GetRolesAsync();
+        Task<List<UserStatus>> GetStatusAsync();
+        Task<bool> ChangeStatusAsync(string username, int status);
     }
 }

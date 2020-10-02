@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace InitiativesPlus.Domain.Models
+﻿namespace InitiativesPlus.Domain.Models
 {
     public class UserInitiative
     {

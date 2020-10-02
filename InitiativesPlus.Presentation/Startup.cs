@@ -39,8 +39,10 @@ namespace InitiativesPlus.Presentation
         {
             services.AddDbContext<InitiativesPlusDbContext>(options =>
             {
+                //options.UseSqlServer(
+                //    Configuration.GetConnectionString("AzureConnection"));
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("AzureConnection"));
+                    Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddCors(options =>
             {
