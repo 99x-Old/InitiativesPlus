@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { ChangeRole } from "../_models/ChangeRole";
+import { ChangeRole } from "../_models/UserChangeRole";
+import { UserChangeStatus } from '../_models/UserChangeStatus';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +28,21 @@ constructor(private http: HttpClient, private router: Router) { }
     );
   }
 
+  gerListOfStatuses(){
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      }
+    );
+    const options = { headers };
+    return this.http.get<any>(this.baseUrl + 'user/list-user-statuses', options)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   changeUserRole(model: ChangeRole){
-    //console.log("model", model);
     const headers = new HttpHeaders(
       {
         'Content-type': 'application/json',
@@ -44,7 +58,24 @@ constructor(private http: HttpClient, private router: Router) { }
     );
   }
 
+  changeUserStatus(model: UserChangeStatus){
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      }
+    );
+    const options = { headers };
+    return this.http.put<any>(this.baseUrl + 'user/change-status', model, options)
+    .pipe(map(response => {
+    }))
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: any) {
+    console.log(error)
     const applicationError = error.error.error_description;
     if (applicationError) {
       return throwError(applicationError);

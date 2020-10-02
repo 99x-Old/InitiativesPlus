@@ -35,8 +35,7 @@ namespace InitiativesPlus.Infrastructure.Data.SeedData
                 foreach (var user in users)
                 {
                     //Create password
-                    byte[] passwordHash, passwordSalt;
-                    CreatePasswordHash("password", out passwordHash, out passwordSalt);
+                    CreatePasswordHash("password", out var passwordHash, out var passwordSalt);
 
                     user.PasswordHash = passwordHash;
                     user.PasswordSalt = passwordSalt;

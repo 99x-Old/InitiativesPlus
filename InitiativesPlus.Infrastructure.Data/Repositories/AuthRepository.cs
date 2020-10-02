@@ -3,9 +3,9 @@ using InitiativesPlus.Domain.Models;
 using InitiativesPlus.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using UserStatus = InitiativesPlus.Infrastructure.Data.StaticClasses.UserStatus;
 
 namespace InitiativesPlus.Infrastructure.Data.Repositories
 {
@@ -22,6 +22,9 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
             if (user == null)
                 return null; // User does not exist.
 
+            if (user.StatusId == (int) UserStatus.Deactivated || user.StatusId == (int) UserStatus.Deleted)
+                return null; // User is deactivated or deleted.
+
             if (!VerifyPassword(password, user.PasswordHash, user.PasswordSalt))
                 return null;
 
@@ -30,8 +33,7 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
 
         public async Task<User> Register(User user, string password)
         {
-            byte[] passwordHash, passwordSalt;
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;

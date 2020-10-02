@@ -2,13 +2,9 @@
 using InitiativesPlus.Domain.Models;
 using InitiativesPlus.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Azure.Amqp.Serialization;
 using InitiativeStatus = InitiativesPlus.Infrastructure.Data.StaticClasses.InitiativeStatus;
 
 namespace InitiativesPlus.Infrastructure.Data.Repositories

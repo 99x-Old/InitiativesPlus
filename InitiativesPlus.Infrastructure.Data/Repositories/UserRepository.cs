@@ -7,6 +7,7 @@ using InitiativesPlus.Infrastructure.Data.Context;
 using InitiativesPlus.Infrastructure.Data.ExternalServices;
 using InitiativesPlus.Infrastructure.Data.StaticClasses;
 using Microsoft.EntityFrameworkCore;
+using UserStatus = InitiativesPlus.Domain.Models.UserStatus;
 
 namespace InitiativesPlus.Infrastructure.Data.Repositories
 {
@@ -46,6 +47,21 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
         public async Task<List<UserRole>> GetRolesAsync()
         {
             return await _context.UserRoles.ToListAsync();
+        }
+
+        public async Task<List<UserStatus>> GetStatusAsync()
+        {
+            return await _context.UserStatuses.ToListAsync();
+        }
+
+        public async Task<bool> ChangeStatusAsync(string username, int status)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            user.StatusId = status;
+            _context.Entry(user).State = EntityState.Modified;
+
+            bool success = await _context.SaveChangesAsync() > 0;
+            return success;
         }
     }
 }

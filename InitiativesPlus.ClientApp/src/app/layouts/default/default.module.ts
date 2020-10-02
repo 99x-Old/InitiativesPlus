@@ -27,6 +27,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { DataTablesModule } from 'angular-datatables';
 import { InitiativeComponent } from '../../modules/initiative/initiative.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MentorsComponent } from 'src/app/modules/tools/mentors/mentors.component';
+import { StarterkitComponent } from 'src/app/modules/tools/starterkit/starterkit.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     HomeComponent,
     InitiativesComponent,
     AdministrationComponent,
-    InitiativeComponent
+    InitiativeComponent,
+    StarterkitComponent,
+    MentorsComponent
   ],
   imports: [
     CommonModule,

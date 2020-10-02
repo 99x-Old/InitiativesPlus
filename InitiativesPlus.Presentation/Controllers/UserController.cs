@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +9,6 @@ using InitiativesPlus.Application.ViewModels;
 using InitiativesPlus.Infrastructure.Data.StaticClasses;
 using InitiativesPlus.Presentation.Resources;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
@@ -92,6 +90,22 @@ namespace InitiativesPlus.Presentation.Controllers
                 return Ok();
             
             return BadRequest(string.Format(_errorLocalizer["FailedRoleUpdate"].Value, assignRoleViewModel.UserName));
+        }        
+        
+        [HttpPut("change-status")]
+        [Authorize(Roles = RoleTypes.SuperAdmin)]
+        public async Task<IActionResult> CgangeStatus([FromBody] ChangeUserStatusViewModel changeUserStatusViewModel)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!await _authService.UserExists(changeUserStatusViewModel.UserName))
+                return NotFound(string.Format(_errorLocalizer["UserNotExist"].Value, changeUserStatusViewModel.UserName));
+
+            if (await _userService.ChangeStatusAsync(changeUserStatusViewModel))
+                return Ok();
+            
+            return BadRequest(string.Format(_errorLocalizer["FailedRoleUpdate"].Value, changeUserStatusViewModel.UserName));
         }
 
         [HttpGet("list-roles")]
@@ -99,6 +113,14 @@ namespace InitiativesPlus.Presentation.Controllers
         public async Task<IActionResult> GetListOfRoles()
         {
             var roles = await _userService.GetRolesAsync();
+            return Ok(roles);
+        }
+
+        [HttpGet("list-user-statuses")]
+        [Authorize(Roles = RoleTypes.SuperAdmin)]
+        public async Task<IActionResult> GetListOfStatuses()
+        {
+            var roles = await _userService.GetStatusAsync();
             return Ok(roles);
         }
     }
