@@ -4,7 +4,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using InitiativesPlus.Application.Interfaces;
 using InitiativesPlus.Application.ViewModels;
-using InitiativesPlus.Infrastructure.Data.StaticClasses;
 using InitiativesPlus.Presentation.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +11,7 @@ using Microsoft.Extensions.Localization;
 
 namespace InitiativesPlus.Presentation.Controllers
 {
-    //[Authorize(Roles = "Initiative Lead")]
-    [Authorize(Roles = RoleTypes.User)]
+    [Authorize(Policy = "ElevatedRights")]
     [Route("api/[controller]")]
     [ApiController]
     public class InitiativeController : ControllerBase

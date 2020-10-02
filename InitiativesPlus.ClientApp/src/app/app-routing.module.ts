@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from './layouts/default/default.component';
 import { AdministrationComponent } from './modules/administration/administration.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { EvaluationComponent } from './modules/evaluation/evaluation.component';
 import { HomeComponent } from './modules/home/home.component';
 import { InitiativeComponent } from './modules/initiative/initiative.component';
 import { InitiativesComponent } from './modules/initiatives/initiatives.component';
@@ -72,6 +73,16 @@ const routes: Routes = [
         data: {
           roles: [
           'User', 'Super Admin', 'Initiative Lead', 'Initiative Evaluator'
+          ]
+        }
+      },
+      {
+        path: 'evaluation',
+        component: EvaluationComponent,
+        canActivate: [AuthGuard],
+        data: {
+          roles: [
+          'Initiative Evaluator'
           ]
         }
       }

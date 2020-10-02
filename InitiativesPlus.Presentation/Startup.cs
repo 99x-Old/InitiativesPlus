@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InitiativesPlus.Infrastructure.Data.Context;
 using InitiativesPlus.Infrastructure.Data.SeedData;
+using InitiativesPlus.Infrastructure.Data.StaticClasses;
 using InitiativesPlus.Infrastructure.IoC;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -93,6 +94,12 @@ namespace InitiativesPlus.Presentation
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ElevatedRights", policy =>
+                    policy.RequireRole(RoleTypes.SuperAdmin, RoleTypes.InitiativeEvaluator, RoleTypes.InitiativeLead, RoleTypes.User));
             });
 
             services.AddTransient<Seed>();

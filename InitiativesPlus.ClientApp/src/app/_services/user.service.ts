@@ -75,7 +75,9 @@ constructor(private http: HttpClient, private router: Router) { }
   }
 
   private handleError(error: any) {
-    console.log(error)
+    if(error.status === 403){
+      return throwError("You're not authorized to view this!");
+    }
     const applicationError = error.error.error_description;
     if (applicationError) {
       return throwError(applicationError);
