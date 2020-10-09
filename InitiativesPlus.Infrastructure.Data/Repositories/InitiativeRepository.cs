@@ -1,4 +1,5 @@
-﻿using InitiativesPlus.Domain.Interfaces;
+﻿using System;
+using InitiativesPlus.Domain.Interfaces;
 using InitiativesPlus.Domain.Models;
 using InitiativesPlus.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -51,13 +52,6 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> InitiativeExistsAsync(int id)
-        {
-            if (await _context.Initiatives.AnyAsync(x => x.Id == id))
-                return true;
-            return false;
-        }        
-        
         public async Task<bool> RemoveInitiativeAsync(int id)
         {
             var initiative = await _context.Initiatives.FirstOrDefaultAsync(x => x.Id == id);
@@ -81,6 +75,53 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
             _context.UserInitiatives.Remove(initiativeUser);
 
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> CreateInitiativeAsync(Initiative initiative, string year)
+        {
+            initiative.StatusId = (int)InitiativeStatus.Active;
+            var initiativeInDb = await _context.Initiatives.FirstOrDefaultAsync(x => x.Name == initiative.Name);
+            bool success = false;
+            if (initiativeInDb == null)
+            {
+                await _context.Initiatives.AddAsync(initiative);
+                success = await _context.SaveChangesAsync() > 0;
+            }
+
+            var initiativeYear = new InitiativeYear
+            {
+                Year = new DateTime(Int32.Parse(year), 1, 1),
+                InitiativeId = success ? initiative.Id : initiativeInDb.Id
+            };
+
+            await _context.InitiativeYears.AddAsync(initiativeYear);
+
+            return await _context.SaveChangesAsync() > 0;
+
+
+        }
+
+        public async Task<bool> InitiativeExistsAsync(int id)
+        {
+            if (await _context.Initiatives.AnyAsync(x => x.Id == id))
+                return true;
+            return false;
+        }
+
+        public async Task<bool> InitiativeExistsAsync(string initiative, string year)
+        {
+            var initiativeInDb = await _context.Initiatives.FirstOrDefaultAsync(x => x.Name == initiative);
+            if (initiativeInDb == null)
+                return false;
+
+            var initiativeYearInDb = await _context.InitiativeYears.FirstOrDefaultAsync(x =>
+                x.InitiativeId == initiativeInDb.Id && 
+                x.Year == new DateTime(Int32.Parse(year), 1, 1));
+
+            if (initiativeYearInDb == null)
+                return false;
+
+            return true;
         }
     }
 }

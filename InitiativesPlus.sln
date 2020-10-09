@@ -13,11 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.Present
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitiativesPlus.Presentation", "InitiativesPlus.Presentation\InitiativesPlus.Presentation.csproj", "{B8DED407-DC20-4717-A136-83C34F18D57D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitiativesPlus.Domain", "InitiativesPlus.Domain\InitiativesPlus.Domain.csproj", "{47D777A9-D823-4DB9-A063-6E280F8DC66A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitiativesPlus.Domain", "InitiativesPlus.Domain\InitiativesPlus.Domain.csproj", "{8EFBD007-6F11-47FF-BEBB-63F7B8B46BBD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitiativesPlus.Infrastructure.Data", "InitiativesPlus.Infrastructure.Data\InitiativesPlus.Infrastructure.Data.csproj", "{C6E0B38A-CE89-4D06-B76A-4C05C0A9190C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitiativesPlus.Application", "InitiativesPlus.Application\InitiativesPlus.Application.csproj", "{B52750FB-F9A2-4BEF-BD76-B4173FB862A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitiativesPlus.Application", "InitiativesPlus.Application\InitiativesPlus.Application.csproj", "{EB12B347-9C58-4A0D-8B52-F0A9ACBDEBE2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitiativesPlus.Infrastructure.IoC", "InitiativesPlus.Infrastructure.IoC\InitiativesPlus.Infrastructure.IoC.csproj", "{5C48C0B1-FE76-4B27-BF0D-5D7DC3A15BC9}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitiativesPlus.99X.Deployment", "InitiativesPlus.99X.Deployment", "{74882986-45CB-4F01-881C-C24E0194A841}"
 EndProject
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "InitiativesPlus.Deployment", "InitiativesPlus.Deployment\InitiativesPlus.Deployment.deployproj", "{C285A132-2F80-4441-8719-2BCBA5C1DD0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitiativesPlus.99X.Infrastructure.NewsLetterSender", "InitiativesPlus.99X.Infrastructure.NewsLetterSender\InitiativesPlus.99X.Infrastructure.NewsLetterSender.csproj", "{574D6FD0-55E3-4432-82DB-E30039B21879}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,18 +39,18 @@ Global
 		{B8DED407-DC20-4717-A136-83C34F18D57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8DED407-DC20-4717-A136-83C34F18D57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8DED407-DC20-4717-A136-83C34F18D57D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{47D777A9-D823-4DB9-A063-6E280F8DC66A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47D777A9-D823-4DB9-A063-6E280F8DC66A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47D777A9-D823-4DB9-A063-6E280F8DC66A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47D777A9-D823-4DB9-A063-6E280F8DC66A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EFBD007-6F11-47FF-BEBB-63F7B8B46BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EFBD007-6F11-47FF-BEBB-63F7B8B46BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EFBD007-6F11-47FF-BEBB-63F7B8B46BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EFBD007-6F11-47FF-BEBB-63F7B8B46BBD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C6E0B38A-CE89-4D06-B76A-4C05C0A9190C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C6E0B38A-CE89-4D06-B76A-4C05C0A9190C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6E0B38A-CE89-4D06-B76A-4C05C0A9190C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6E0B38A-CE89-4D06-B76A-4C05C0A9190C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B52750FB-F9A2-4BEF-BD76-B4173FB862A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B52750FB-F9A2-4BEF-BD76-B4173FB862A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B52750FB-F9A2-4BEF-BD76-B4173FB862A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B52750FB-F9A2-4BEF-BD76-B4173FB862A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB12B347-9C58-4A0D-8B52-F0A9ACBDEBE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB12B347-9C58-4A0D-8B52-F0A9ACBDEBE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB12B347-9C58-4A0D-8B52-F0A9ACBDEBE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB12B347-9C58-4A0D-8B52-F0A9ACBDEBE2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C48C0B1-FE76-4B27-BF0D-5D7DC3A15BC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C48C0B1-FE76-4B27-BF0D-5D7DC3A15BC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C48C0B1-FE76-4B27-BF0D-5D7DC3A15BC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,18 +63,23 @@ Global
 		{C285A132-2F80-4441-8719-2BCBA5C1DD0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C285A132-2F80-4441-8719-2BCBA5C1DD0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C285A132-2F80-4441-8719-2BCBA5C1DD0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{574D6FD0-55E3-4432-82DB-E30039B21879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{574D6FD0-55E3-4432-82DB-E30039B21879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{574D6FD0-55E3-4432-82DB-E30039B21879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{574D6FD0-55E3-4432-82DB-E30039B21879}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B8DED407-DC20-4717-A136-83C34F18D57D} = {D24991B2-554E-4109-B145-D0C9457E085F}
-		{47D777A9-D823-4DB9-A063-6E280F8DC66A} = {827FDECD-7ED2-499A-ACF1-D6B33B76A5C3}
+		{8EFBD007-6F11-47FF-BEBB-63F7B8B46BBD} = {827FDECD-7ED2-499A-ACF1-D6B33B76A5C3}
 		{C6E0B38A-CE89-4D06-B76A-4C05C0A9190C} = {BF728E3B-9227-494F-ACA6-BCB52E614A2E}
-		{B52750FB-F9A2-4BEF-BD76-B4173FB862A3} = {A15C3088-502C-4168-BE90-DB1BFE835132}
+		{EB12B347-9C58-4A0D-8B52-F0A9ACBDEBE2} = {A15C3088-502C-4168-BE90-DB1BFE835132}
 		{5C48C0B1-FE76-4B27-BF0D-5D7DC3A15BC9} = {BF728E3B-9227-494F-ACA6-BCB52E614A2E}
 		{1795B947-1856-484E-AF71-064B0757A09D} = {BF728E3B-9227-494F-ACA6-BCB52E614A2E}
 		{C285A132-2F80-4441-8719-2BCBA5C1DD0C} = {74882986-45CB-4F01-881C-C24E0194A841}
+		{574D6FD0-55E3-4432-82DB-E30039B21879} = {BF728E3B-9227-494F-ACA6-BCB52E614A2E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C6074634-9110-4666-8A18-D433EE8984EE}

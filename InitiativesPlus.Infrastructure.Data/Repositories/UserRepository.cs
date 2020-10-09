@@ -49,6 +49,11 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
             return await _context.UserRoles.ToListAsync();
         }
 
+        public async Task<List<User>> GetListOfEmailsAsync()
+        {
+            return await _context.Users.ToListAsync();
+        }
+
         public async Task<List<UserStatus>> GetStatusAsync()
         {
             return await _context.UserStatuses.ToListAsync();

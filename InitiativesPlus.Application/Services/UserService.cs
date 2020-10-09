@@ -27,6 +27,12 @@ namespace InitiativesPlus.Application.Services
             return await _userRepository.ChangeStatusAsync(changeUserStatusViewModel.UserName, changeUserStatusViewModel.NewStatus);
         }
 
+        public async Task<List<string>> GetListOfEmailsAsync()
+        {
+            var users = await _userRepository.GetListOfEmailsAsync();
+            return users.Where(x => x.Email != "").Select(x => x.Email).ToList();
+        }
+
         public async Task<List<string>> GetRolesAsync()
         {
             var users = await _userRepository.GetRolesAsync();

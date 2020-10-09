@@ -13,6 +13,7 @@ namespace InitiativesPlus.Infrastructure.IoC
         public static void RegisterServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(AutoMapperProfiles));
+
             //InitiativesPlus.Application
             services.AddScoped<IInitiativeService, InitiativeService>();
             services.AddScoped<IAuthService, AuthService>();
@@ -22,6 +23,7 @@ namespace InitiativesPlus.Infrastructure.IoC
             services.AddScoped<IInitiativeRepository, InitiativeRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IEventRepository, EventRepository>();
         }
     }
 }

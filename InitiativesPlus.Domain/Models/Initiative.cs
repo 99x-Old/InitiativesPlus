@@ -2,7 +2,7 @@
 
 namespace InitiativesPlus.Domain.Models
 {
-    public class Initiative
+    public class Initiative : BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
