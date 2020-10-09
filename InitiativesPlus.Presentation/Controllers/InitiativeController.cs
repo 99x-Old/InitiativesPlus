@@ -4,7 +4,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using InitiativesPlus.Application.Interfaces;
 using InitiativesPlus.Application.ViewModels;
-using InitiativesPlus.Infrastructure.Data.StaticClasses;
 using InitiativesPlus.Presentation.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +11,7 @@ using Microsoft.Extensions.Localization;
 
 namespace InitiativesPlus.Presentation.Controllers
 {
-    //[Authorize(Roles = "Initiative Lead")]
-    [Authorize(Roles = RoleTypes.User)]
+    [Authorize(Policy = "ElevatedRights")]
     [Route("api/[controller]")]
     [ApiController]
     public class InitiativeController : ControllerBase
@@ -104,6 +102,25 @@ namespace InitiativesPlus.Presentation.Controllers
             }
             bool success = await _initiativeService.RemoveUserFromInitiativeAsync(id, userToRemove);
             return Ok(success);
+        }
+
+        [HttpPost]
+        [Route("create")]
+        public async Task<IActionResult> CreateInitiative(InitiativeForCreate initiativeForCreate)
+        {
+            if (await _initiativeService.InitiativeExistsAsync(initiativeForCreate))
+                return BadRequest("Initiative already exists for year " + initiativeForCreate.Year);
+
+            bool success = await _initiativeService.CreateInitiativeAsync(initiativeForCreate);
+            return Ok(success);
+        }
+
+        [HttpGet]
+        [Route("events")]
+        public async Task<IActionResult> GetEventisForMonth()
+        {
+            var events = await _initiativeService.GetEventsForMonthAsync();
+            return Ok(events);
         }
     }
 }

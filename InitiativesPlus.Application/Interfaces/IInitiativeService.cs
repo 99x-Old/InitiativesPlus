@@ -11,7 +11,11 @@ namespace InitiativesPlus.Application.Interfaces
         Task<bool> JoinInitiativeAsync(int id, int userId);
         Task<bool> UserExistsInInitiativeAsync(int id, int userId);
         Task<bool> InitiativeExistsAsync(int id);
+        Task<bool> InitiativeExistsAsync(InitiativeForCreate initiativeForCreate);
         Task<bool> RemoveInitiativeAsync(int id);
         Task<bool> RemoveUserFromInitiativeAsync(int id, int userId);
+        Task<bool> CreateInitiativeAsync(InitiativeForCreate initiativeForCreate);
+        Task<List<EventToReturn>> GetEventsForMonthAsync();
+        
     }
 }

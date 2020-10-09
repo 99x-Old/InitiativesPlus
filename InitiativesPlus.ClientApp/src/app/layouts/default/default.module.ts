@@ -29,6 +29,7 @@ import { InitiativeComponent } from '../../modules/initiative/initiative.compone
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MentorsComponent } from 'src/app/modules/tools/mentors/mentors.component';
 import { StarterkitComponent } from 'src/app/modules/tools/starterkit/starterkit.component';
+import { EvaluationComponent } from "../../modules/evaluation/evaluation.component";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { StarterkitComponent } from 'src/app/modules/tools/starterkit/starterkit
     AdministrationComponent,
     InitiativeComponent,
     StarterkitComponent,
-    MentorsComponent
+    MentorsComponent,
+    EvaluationComponent
   ],
   imports: [
     CommonModule,

@@ -1,10 +1,16 @@
-﻿using InitiativesPlus.Domain.Models;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using InitiativesPlus.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace InitiativesPlus.Infrastructure.Data.Context
 {
     public class InitiativesPlusDbContext : DbContext
     {
+        private const string EntityCreatedPropertyName = "CreatedDate";
+        private const string EntityModifiedPropertyName = "ModifiedDate";
         public InitiativesPlusDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Initiative> Initiatives { get; set; }
@@ -37,6 +43,37 @@ namespace InitiativesPlus.Infrastructure.Data.Context
 
             modelBuilder.Entity<UserInitiative>()
                 .HasKey(p => new { p.UserId, p.InitiativeId });
+        }
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            #region Automatically set "CreatedDate" property on an a new entity
+            var addedEntities = ChangeTracker.Entries().Where(E => E.State == EntityState.Added).ToList();
+
+            addedEntities.ForEach(E =>
+            {
+                var prop = E.Metadata.FindProperty(EntityCreatedPropertyName);
+                if (prop != null)
+                {
+                    E.Property(EntityCreatedPropertyName).CurrentValue = DateTime.Now;
+                }
+            });
+            #endregion
+
+            #region Automatically set "ModifiedDate" property on an a new entity
+            var editedEntities = ChangeTracker.Entries().Where(E => E.State == EntityState.Modified).ToList();
+
+            editedEntities.ForEach(E =>
+            {
+                var prop = E.Metadata.FindProperty(EntityModifiedPropertyName);
+                if (prop != null)
+                {
+                    E.Property(EntityModifiedPropertyName).CurrentValue = DateTime.Now;
+                }
+            });
+            #endregion
+
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
     }
 }

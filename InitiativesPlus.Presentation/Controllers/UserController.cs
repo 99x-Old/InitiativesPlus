@@ -123,5 +123,13 @@ namespace InitiativesPlus.Presentation.Controllers
             var roles = await _userService.GetStatusAsync();
             return Ok(roles);
         }
+
+        [HttpGet("list-emails")]
+        [Authorize(Roles = RoleTypes.SuperAdmin)]
+        public async Task<IActionResult> GetListOfEmails()
+        {
+            var emails = await _userService.GetListOfEmailsAsync();
+            return Ok(emails);
+        }
     }
 }

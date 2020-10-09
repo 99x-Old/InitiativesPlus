@@ -8,6 +8,7 @@ namespace InitiativesPlus.Domain.Interfaces
     {
         Task<bool> AssignRoleAsync(string username, int role);
         Task<List<UserRole>> GetRolesAsync();
+        Task<List<User>> GetListOfEmailsAsync();
         Task<List<UserStatus>> GetStatusAsync();
         Task<bool> ChangeStatusAsync(string username, int status);
     }

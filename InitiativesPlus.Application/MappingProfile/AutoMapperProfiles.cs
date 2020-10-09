@@ -17,6 +17,8 @@ namespace InitiativesPlus.Application.MappingProfile
 
             CreateMap<UserForRegisterViewModel, User>();
             CreateMap<UserForLoginViewModel, User>();
+            CreateMap<InitiativeForCreate, Initiative>();
+            CreateMap<Event, EventToReturn>();
         }
     }
 }
