@@ -15,7 +15,7 @@ namespace InitiativesPlus._99X.Infrastructure.NewsLetterSender
         private static readonly string url = "https://initiatives-plus-api.azurewebsites.net";
 
         [FunctionName("NewsLetter")]
-        public static async Task Run([TimerTrigger("0 0 0 1 * *")]TimerInfo myTimer, ILogger log) // Runs every 1st of the month
+        public static async Task Run([TimerTrigger("0 0 0 1 * *")]TimerInfo myTimer, ILogger log) // Runs every 1st of day the month (monthly)
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
             var user = new User
