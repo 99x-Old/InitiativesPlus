@@ -53,7 +53,7 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
 
         public async Task<List<Event>> QueryEventsAsync()
         {
-            var month = DateTime.Now.ToString("MM-yyyy");
+            var month = DateTime.Now.AddMonths(-1).ToString("MM-yyyy");
             await GetStartedAsync();
             var sqlQueryText = "SELECT * FROM c WHERE c.Month = '" + month + "'";
 
