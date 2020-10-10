@@ -3,6 +3,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
     <RootNamespace>InitiativesPlus._99X.Infrastructure.NewsLetterSender</RootNamespace>
+    <UserSecretsId>f62faeb9-c08e-4fce-9bcb-210a770c3e6b</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.ServiceBus" Version="5.0.0" />
