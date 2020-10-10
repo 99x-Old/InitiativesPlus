@@ -5,6 +5,7 @@
     <RootNamespace>InitiativesPlus._99X.Infrastructure.NewsLetterSender</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.ServiceBus" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.3" />
   </ItemGroup>
   <ItemGroup>
