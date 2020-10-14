@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using InitiativesPlus.Infrastructure.Data.Context;
@@ -118,7 +117,7 @@ namespace InitiativesPlus.Presentation
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "InitiativesPLUS API V1");
                 c.RoutePrefix = string.Empty;
             });
 
