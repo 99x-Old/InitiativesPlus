@@ -18,12 +18,14 @@ namespace InitiativesPlus.Infrastructure.IoC
             services.AddScoped<IInitiativeService, InitiativeService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IActionService, ActionService>();
 
             //InitiativesPlus.Domain.Interfaces | InitiativesPlus.Infrastructure.Data.Repositories
             services.AddScoped<IInitiativeRepository, InitiativeRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IActionRepository, ActionRepository>();
         }
     }
 }

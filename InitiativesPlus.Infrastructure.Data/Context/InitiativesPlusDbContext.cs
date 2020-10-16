@@ -21,6 +21,7 @@ namespace InitiativesPlus.Infrastructure.Data.Context
         public DbSet<UserInitiative> UserInitiatives { get; set; }
         public DbSet<InitiativeStatus> InitiativeStatuses { get; set; }
         public DbSet<InitiativeLead> InitiativeLeads { get; set; }
+        public DbSet<InitiativeAction> InitiativeActions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -9,19 +9,28 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { UserService } from 'src/app/_services/user.service';
 import { ActionDialogData } from "../../_models/ActionDialogData";
 import { InitiativeChangeLead } from 'src/app/_models/InitiativeChangeLead';
+import { InitiativeAction } from "../../_models/InitiativeAction";
+import { InitiativeActionToDisplay } from "../../_models/InitiativeActionToDisplay";
+import { MatAccordion } from '@angular/material/expansion';
+import { InitiativeActionForUpdate } from 'src/app/_models/InitiativeActionForCreate';
 
 @Component({
   selector: 'app-initiative',
   templateUrl: './initiative.component.html',
   styleUrls: ['./initiative.component.scss']
 })
+
 export class InitiativeComponent implements OnInit {
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   id: number;
   private sub: any;
-  public initiative: InitiativeForDisplay;
-  evaluator: string = "Initiative Evaluator";
+  initiative: InitiativeForDisplay;
+  userList: string [] = ["Initiative Evaluator", "Initiative Lead"];
   users: UserForDisplay[] = [];
+  actions: InitiativeActionToDisplay [] = [];
   dialogData: ActionDialogData;
+  evaluator: string = "Initiative Evaluator"
+  lead: string = "Initiative Lead"
 
   constructor(
     private route: ActivatedRoute, 
@@ -45,6 +54,7 @@ export class InitiativeComponent implements OnInit {
    });
 
    this.getUsers();
+   this.loadActions();
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
@@ -89,15 +99,23 @@ export class InitiativeComponent implements OnInit {
     this.initiativesService.getUsers(this.id)
     .subscribe(data => {
       this.users = data as UserForDisplay[];
-      console.log(this.users)
+      // console.log(this.users)
     }, error => {
       this.toastr.error(error)
     });
   }
 
-  isAuthorized(role: string){
+  isAuthorized(roles: string []){
     let user = this.authService.getUserRole();
-    return (role === user);
+    if(roles.includes(user)){
+      return true;
+    }
+    return false;
+  }
+  
+  isAuthorizedUser(role: string){
+    let user = this.authService.getUserRole();
+    return role === user;
   }
 
   openDialog(dataFromPage: ActionDialogData): void {
@@ -106,9 +124,29 @@ export class InitiativeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      // this.animal = result;
+      this.loadActions();
     });
+  }
+
+  loadActions(){
+    if(this.isAuthorizedUser(this.lead)){
+      this.initiativesService.getActions(this.id)
+      .subscribe(data => {
+        this.actions = data as InitiativeActionToDisplay[];
+        // console.log(this.users)
+      }, error => {
+        this.toastr.error(error)
+      });
+    }
+  }
+
+  updateAction(action: InitiativeActionForUpdate){
+    this.initiativesService.updateAction(action)
+      .subscribe(data => {
+        this.toastr.success("Action updated")
+      }, error => {
+        this.toastr.error(error)
+      });
   }
 }
 
@@ -117,12 +155,17 @@ export class InitiativeComponent implements OnInit {
   templateUrl: 'actions-dialog.html',
 })
 export class ActionsDialog {
+  action: string;
+  evaluator: string = "Initiative Evaluator"
+  lead: string = "Initiative Lead"
 
   constructor(
     public dialogRef: MatDialogRef<ActionsDialog>,
     @Inject(MAT_DIALOG_DATA) public data: ActionDialogData,
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService,
+    private initiativesService: InitiativesService
     ) {}
 
   onNoClick(): void {
@@ -130,7 +173,6 @@ export class ActionsDialog {
   }
 
   changeLead(){
-    console.log(this.data.user.id)
     const model: InitiativeChangeLead ={
       initiativeId : this.data.initiativeId,
       userId: this.data.user.id
@@ -143,4 +185,24 @@ export class ActionsDialog {
     });
   }
 
+  isAuthorizedUser(role: string){
+    let user = this.authService.getUserRole();
+    return role === user;
+  }
+
+  createAction(){
+    const actionToCreate: InitiativeAction = {
+      initiativeId: this.data.initiativeId,
+      userId: this.data.user.id,
+      action: this.action,
+      progress: 0
+    }
+
+    this.initiativesService.createAction(actionToCreate)
+    .subscribe(data => {
+      this.toastr.success("Action created and assigned")
+    }, error => {
+      this.toastr.error(error)
+    });
+  }
 }

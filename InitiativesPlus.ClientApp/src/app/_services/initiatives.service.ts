@@ -5,7 +5,9 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { InitiativesForList } from "../_models/InitiativesForList";
 import { InitiativeForCreate } from "../_models/InitiativeForCreate";
+import { InitiativeActionForUpdate } from "../_models/InitiativeActionForCreate";
 import { Router } from '@angular/router';
+import { InitiativeAction } from '../_models/InitiativeAction';
 
 @Injectable({
   providedIn: 'root'
@@ -122,6 +124,48 @@ export class InitiativesService {
     );
     const options = { headers };
     return this.http.get(this.baseUrl + 'initiative/users/' + id, options)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  createAction(model: InitiativeAction){
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+localStorage.getItem('token')
+      }
+    );
+    const options = { headers };
+    return this.http.post<any>(this.baseUrl + 'Actions/create/' , model, options)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getActions(id: number){
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+localStorage.getItem('token')
+      }
+    );
+    const options = { headers };
+    return this.http.get<any>(this.baseUrl + 'Actions/' + id, options)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateAction(model: InitiativeActionForUpdate){
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+localStorage.getItem('token')
+      }
+    );
+    const options = { headers };
+    return this.http.put<any>(this.baseUrl + 'Actions' ,model, options)
     .pipe(
       catchError(this.handleError)
     );
