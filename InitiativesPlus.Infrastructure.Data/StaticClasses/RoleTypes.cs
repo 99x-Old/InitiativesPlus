@@ -7,5 +7,13 @@
             InitiativeLead = "Initiative Lead",
             SuperAdmin = "Super Admin",
             InitiativeEvaluator = "Initiative Evaluator";
+
+        public enum RoleIds
+        {
+            User = 1,
+            InitiativeLead = 2,
+            SuperAdmin = 3,
+            InitiativeEvaluator = 4
+        }
     }
 }

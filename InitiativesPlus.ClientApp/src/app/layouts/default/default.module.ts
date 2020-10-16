@@ -25,11 +25,12 @@ import { UserService } from 'src/app/_services/user.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { DataTablesModule } from 'angular-datatables';
-import { InitiativeComponent } from '../../modules/initiative/initiative.component';
+import { ActionsDialog, InitiativeComponent } from '../../modules/initiative/initiative.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MentorsComponent } from 'src/app/modules/tools/mentors/mentors.component';
 import { StarterkitComponent } from 'src/app/modules/tools/starterkit/starterkit.component';
 import { EvaluationComponent } from "../../modules/evaluation/evaluation.component";
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { EvaluationComponent } from "../../modules/evaluation/evaluation.compone
     InitiativeComponent,
     StarterkitComponent,
     MentorsComponent,
-    EvaluationComponent
+    EvaluationComponent,
+    ActionsDialog
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,11 @@ import { EvaluationComponent } from "../../modules/evaluation/evaluation.compone
     MatIconModule,
     MatButtonModule,
     DataTablesModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    ActionsDialog
   ],
   providers: [
     DashboardService,

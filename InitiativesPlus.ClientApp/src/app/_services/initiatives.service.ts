@@ -4,20 +4,22 @@ import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { InitiativesForList } from "../_models/InitiativesForList";
+import { InitiativeForCreate } from "../_models/InitiativeForCreate";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InitiativesService {
   baseUrl = environment.apiUrl;
-  token: string = localStorage.getItem('token');
-  constructor(private http: HttpClient) { }
+  // token: string = localStorage.getItem('token');
+  constructor(private http: HttpClient, private router: Router) { }
 
   getListOfInitiatives(filter?: string) {
     const headers = new HttpHeaders(
       {
         'Content-type': 'application/json',
-        'Authorization': 'Bearer '+this.token
+        'Authorization': 'Bearer '+localStorage.getItem('token')
       }
     );
     const options = { headers };
@@ -31,7 +33,7 @@ export class InitiativesService {
     const headers = new HttpHeaders(
       {
         'Content-type': 'application/json',
-        'Authorization': 'Bearer '+this.token
+        'Authorization': 'Bearer '+localStorage.getItem('token')
       }
     );
     const options = { headers };
@@ -45,7 +47,7 @@ export class InitiativesService {
     const headers = new HttpHeaders(
       {
         'Content-type': 'application/json',
-        'Authorization': 'Bearer '+this.token
+        'Authorization': 'Bearer '+localStorage.getItem('token')
       }
     );
     const options = { headers };
@@ -59,7 +61,7 @@ export class InitiativesService {
     const headers = new HttpHeaders(
       {
         'Content-type': 'application/json',
-        'Authorization': 'Bearer '+this.token
+        'Authorization': 'Bearer '+localStorage.getItem('token')
       }
     );
     const options = { headers };
@@ -73,11 +75,53 @@ export class InitiativesService {
     const headers = new HttpHeaders(
       {
         'Content-type': 'application/json',
-        'Authorization': 'Bearer '+this.token
+        'Authorization': 'Bearer '+localStorage.getItem('token')
       }
     );
     const options = { headers };
     return this.http.get<any>(this.baseUrl + 'Initiative/Join/' + id, options)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  createInitiative(model: InitiativeForCreate){
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+localStorage.getItem('token')
+      }
+    );
+    const options = { headers };
+    return this.http.post<any>(this.baseUrl + 'Initiative/create/' , model, options)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteInitiative(id: number) {
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+localStorage.getItem('token')
+      }
+    );
+    const options = { headers };
+    return this.http.delete(this.baseUrl + 'initiative/remove/' + id, options)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getUsers(id: number) {
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+localStorage.getItem('token')
+      }
+    );
+    const options = { headers };
+    return this.http.get(this.baseUrl + 'initiative/users/' + id, options)
     .pipe(
       catchError(this.handleError)
     );

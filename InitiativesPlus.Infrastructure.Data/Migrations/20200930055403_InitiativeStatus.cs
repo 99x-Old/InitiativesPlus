@@ -23,6 +23,7 @@ namespace InitiativesPlus.Infrastructure.Data.Migrations
                 SET IDENTITY_INSERT [dbo].[InitiativeStatuses] ON
                 INSERT INTO [dbo].[InitiativeStatuses] ([Id], [Status]) VALUES (1, N'Active')
                 INSERT INTO [dbo].[InitiativeStatuses] ([Id], [Status]) VALUES (2, N'Inactive')
+                INSERT INTO [dbo].[InitiativeStatuses] ([Id], [Status]) VALUES (3, N'Deleted')
                 SET IDENTITY_INSERT [dbo].[InitiativeStatuses] OFF
             ");
 

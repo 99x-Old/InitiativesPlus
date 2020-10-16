@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>User Actions</h1>
+<div mat-dialog-content>
+  <p>Make this user as the initiative lead?&nbsp;
+  <button (click)="changeLead()" mat-fab color="accent" matTooltip="Make as Lead" aria-label="Example icon button with a bookmark icon">
+    <mat-icon>check_circle_outline</mat-icon>
+  </button></p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+</div>

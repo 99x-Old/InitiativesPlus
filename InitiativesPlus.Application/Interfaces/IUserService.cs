@@ -11,5 +11,6 @@ namespace InitiativesPlus.Application.Interfaces
         Task<List<string>> GetStatusAsync();
         Task<bool> ChangeStatusAsync(ChangeUserStatusViewModel changeUserStatusViewModel);
         Task<List<string>> GetListOfEmailsAsync();
+        Task<bool> AssignLeadAsync(AssignLeadViewModel assignLeadViewModel);
     }
 }

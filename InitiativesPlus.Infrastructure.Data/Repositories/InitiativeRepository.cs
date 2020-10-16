@@ -19,6 +19,7 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
         }
         public async Task<List<Initiative>> GetInitiativesAsync(int? userId)
         {
+            
             if (userId != null)
             {
                 List<int> initiativeIds = new List<int>();
@@ -33,7 +34,12 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
 
                 return await _context.Initiatives.Where(i => initiativeIds.Contains(i.Id)).ToListAsync();
             }
-            return await _context.Initiatives.ToListAsync();
+            int year = Convert.ToInt32(DateTime.Today.Year);
+            return await _context.Initiatives
+                .Where(x => x.InitiativeYears
+                    .Any(y => y.Year == new DateTime(year, 1, 1) && y.InitiativeId == x.Id) 
+                    && x.StatusId == (int)InitiativeStatus.Active)
+                .ToListAsync();
         }
 
         public async Task<Initiative> GetInitiativeAsync(int id)
@@ -97,8 +103,6 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
             await _context.InitiativeYears.AddAsync(initiativeYear);
 
             return await _context.SaveChangesAsync() > 0;
-
-
         }
 
         public async Task<bool> InitiativeExistsAsync(int id)
@@ -122,6 +126,18 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
                 return false;
 
             return true;
+        }
+
+        public async Task<List<User>> InitiativeUsers(int id)
+        {
+            var initiativeInDb = await _context.Initiatives.FirstOrDefaultAsync(x => x.Id == id);
+            if (initiativeInDb == null)
+                return null;
+
+            var users = await _context.UserInitiatives.Where(x => x.InitiativeId == id)
+                .Select(x => x.UserId).ToListAsync();
+
+            return await _context.Users.Where(x => users.Contains(x.Id)).ToListAsync();
         }
     }
 }

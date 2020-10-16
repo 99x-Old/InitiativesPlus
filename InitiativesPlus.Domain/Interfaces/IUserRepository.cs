@@ -11,5 +11,6 @@ namespace InitiativesPlus.Domain.Interfaces
         Task<List<User>> GetListOfEmailsAsync();
         Task<List<UserStatus>> GetStatusAsync();
         Task<bool> ChangeStatusAsync(string username, int status);
+        Task<bool> AssignLeadAsync(int initiativeId, int userId);
     }
 }

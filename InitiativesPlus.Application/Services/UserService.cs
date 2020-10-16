@@ -20,6 +20,11 @@ namespace InitiativesPlus.Application.Services
         public async Task<bool> AssignRoleAsync(AssignRoleViewModel assignRoleViewModel)
         {
             return await _userRepository.AssignRoleAsync(assignRoleViewModel.UserName, assignRoleViewModel.NewRole);
+        }          
+        
+        public async Task<bool> AssignLeadAsync(AssignLeadViewModel assignLeadViewModel)
+        {
+            return await _userRepository.AssignLeadAsync(assignLeadViewModel.initiativeId, assignLeadViewModel.userId);
         }        
         
         public async Task<bool> ChangeStatusAsync(ChangeUserStatusViewModel changeUserStatusViewModel)

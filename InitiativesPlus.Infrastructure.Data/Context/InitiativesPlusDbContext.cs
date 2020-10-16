@@ -20,6 +20,7 @@ namespace InitiativesPlus.Infrastructure.Data.Context
         public DbSet<InitiativeYear> InitiativeYears { get; set; }
         public DbSet<UserInitiative> UserInitiatives { get; set; }
         public DbSet<InitiativeStatus> InitiativeStatuses { get; set; }
+        public DbSet<InitiativeLead> InitiativeLeads { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,6 +43,9 @@ namespace InitiativesPlus.Infrastructure.Data.Context
                 .HasKey(p => new { p.Year, p.InitiativeId });
 
             modelBuilder.Entity<UserInitiative>()
+                .HasKey(p => new { p.UserId, p.InitiativeId });
+
+            modelBuilder.Entity<InitiativeLead>()
                 .HasKey(p => new { p.UserId, p.InitiativeId });
         }
 
