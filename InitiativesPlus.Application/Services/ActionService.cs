@@ -10,15 +10,13 @@ namespace InitiativesPlus.Application.Services
 {
     public class ActionService : IActionService
     {
-        private IActionRepository _actionRepository;
-        private IMapper _mapper;
-        private readonly IEventRepository _eventRepository;
+        private readonly IActionRepository _actionRepository;
+        private readonly IMapper _mapper;
 
-        public ActionService(IActionRepository actionRepository, IMapper mapper, IEventRepository eventRepository)
+        public ActionService(IActionRepository actionRepository, IMapper mapper)
         {
             _actionRepository = actionRepository;
             _mapper = mapper;
-            _eventRepository = eventRepository;
         }
         public async Task<bool> CreateActionAsync(ActionToCreate initiativeForCreate)
         {

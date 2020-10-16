@@ -40,8 +40,8 @@ namespace InitiativesPlus.Presentation.Controllers
         [Authorize(Roles = RoleTypes.InitiativeLead)]
         public async Task<IActionResult> UpdateAction(ActionToUpdate actionToUpdate)
         {
-            var actions = await _actionService.UpdateActionAsync(actionToUpdate);
-            return Ok();
+            var success = await _actionService.UpdateActionAsync(actionToUpdate);
+            return Ok(success);
         }
     }
 }
