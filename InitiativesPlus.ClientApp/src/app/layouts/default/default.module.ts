@@ -31,6 +31,9 @@ import { MentorsComponent } from 'src/app/modules/tools/mentors/mentors.componen
 import { StarterkitComponent } from 'src/app/modules/tools/starterkit/starterkit.component';
 import { EvaluationComponent } from "../../modules/evaluation/evaluation.component";
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule, MatExpansionPanel } from "@angular/material/expansion";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     DataTablesModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   entryComponents: [
     ActionsDialog

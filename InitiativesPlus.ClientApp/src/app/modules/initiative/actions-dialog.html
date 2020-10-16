@@ -1,9 +1,24 @@
 <h1 mat-dialog-title>User Actions</h1>
 <div mat-dialog-content>
-  <p>Make this user as the initiative lead?&nbsp;
-  <button (click)="changeLead()" mat-fab color="accent" matTooltip="Make as Lead" aria-label="Example icon button with a bookmark icon">
-    <mat-icon>check_circle_outline</mat-icon>
-  </button></p>
+    <div *ngIf="isAuthorizedUser(evaluator)">
+        <p>Make this user as the initiative lead?&nbsp;
+        <button (click)="changeLead()" mat-fab color="accent" matTooltip="Make as Lead" aria-label="Example icon button with a bookmark icon">
+            <mat-icon>check_circle_outline</mat-icon>
+        </button></p>
+    </div>
+
+    <div *ngIf="isAuthorizedUser(lead)">
+        <p>Create and assign action for this user</p>
+        <p>
+          <mat-form-field>
+              <mat-label>New Action</mat-label>
+              <input matInput [(ngModel)]="action">
+          </mat-form-field> &nbsp;
+          <button (click)="createAction()" mat-fab color="" matTooltip="Add new action" aria-label="Example icon button with a bookmark icon">
+              <mat-icon>book_online</mat-icon>
+          </button>
+        </p> 
+    </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
