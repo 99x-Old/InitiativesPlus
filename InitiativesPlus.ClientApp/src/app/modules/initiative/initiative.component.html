@@ -14,14 +14,14 @@
                 <mat-icon>not_interested</mat-icon>
               </button>
             </div>
-            <div class="example-button-container">
-              <button mat-fab disabled color="warn" aria-label="Example icon button with a home icon">
-                <mat-icon>home</mat-icon>
+            <div *ngIf="isAuthorized(evaluator)" class="example-button-container">
+              <button (click)="deleteInitiative()" mat-fab color="warn" matTooltip="Delete initiative" aria-label="Example icon button with a home icon">
+                <mat-icon>delete</mat-icon>
               </button>
             </div>
-            <div class="example-button-container">
-              <button mat-fab disabled aria-label="Example icon button with a heart icon">
-                <mat-icon>favorite</mat-icon>
+            <div *ngIf="isAuthorized(evaluator)" class="example-button-container">
+              <button mat-fab color="accent" matTooltip="Edit" aria-label="Example icon button with a heart icon">
+                <mat-icon>edit</mat-icon>
               </button>
             </div>
           </div>
@@ -29,3 +29,28 @@
       </section>
       <mat-divider></mat-divider>
   </div>
+
+<div class="container">
+  &nbsp;
+  <h2>Your colleagues</h2>
+    <mat-divider></mat-divider>
+    <div class="content" fxLayout="row wrap" fxLayoutGap="10px grid">
+      <div fxFlex="25%" *ngFor="let user of users">
+        <mat-card class="mat-elevation-z4" >
+          <mat-card-header>
+            <mat-card-title>{{user.username | titlecase }}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="https://bellfund.ca/wp-content/uploads/2018/03/demo-user.jpg">
+          <mat-card-content>
+            <p>
+              {{user.email}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="accent">LIKE</button>
+            <button *ngIf="isAuthorized(evaluator)" (click)="initiativeActions(user)" mat-raised-button color="accent">ACTIONS</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+</div>

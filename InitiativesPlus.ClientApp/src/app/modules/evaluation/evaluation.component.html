@@ -1,1 +1,26 @@
-<p>evaluation works!</p>
+<div fxLayout="row" fxLayout.xs="column">
+    <mat-card class="example-card" fxFlex="50%;" fxFlex.xs="80%">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>bookmark</mat-icon>
+        <mat-card-title>Create new Initiative</mat-card-title>
+        <mat-card-subtitle>Use this to create initiatives</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field appearance="fill">
+          <mat-label>Initiative Name</mat-label>
+          <input [(ngModel)]="initiativeName" matInput #input placeholder="Username">
+          <!-- <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint> -->
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Initiative Year</mat-label>
+          <mat-select [(ngModel)]="year">
+            <mat-option *ngFor="let y of years" value={{y}}>{{y}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent" (click)="createInitiative()">Create</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>

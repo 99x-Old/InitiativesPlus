@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ChangeRole } from "../_models/UserChangeRole";
 import { UserChangeStatus } from '../_models/UserChangeStatus';
+import { InitiativeChangeLead } from '../_models/InitiativeChangeLead';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,22 @@ constructor(private http: HttpClient, private router: Router) { }
     );
     const options = { headers };
     return this.http.put<any>(this.baseUrl + 'user/assign-role', model, options)
+    .pipe(map(response => {
+    }))
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  changeInitiativeLead(model: InitiativeChangeLead){
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer '+this.token
+      }
+    );
+    const options = { headers };
+    return this.http.post<any>(this.baseUrl + 'user/assign-lead', model, options)
     .pipe(map(response => {
     }))
     .pipe(

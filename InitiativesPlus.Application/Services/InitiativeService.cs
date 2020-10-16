@@ -99,5 +99,12 @@ namespace InitiativesPlus.Application.Services
             var eventToReturn = _mapper.Map<List<EventToReturn>>(events);
             return eventToReturn;
         }
+
+        public async Task<List<UserForDisplay>> GetUsersForInitiative(int id)
+        {
+            var users = await _initiativeRepository.InitiativeUsers(id);
+            var usersToReturn = _mapper.Map<List<UserForDisplay>>(users);
+            return usersToReturn;
+        }
     }
 }

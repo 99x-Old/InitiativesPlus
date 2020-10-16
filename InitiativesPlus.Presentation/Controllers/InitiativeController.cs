@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using InitiativesPlus.Application.Interfaces;
 using InitiativesPlus.Application.ViewModels;
+using InitiativesPlus.Infrastructure.Data.StaticClasses;
 using InitiativesPlus.Presentation.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ using Microsoft.Extensions.Localization;
 
 namespace InitiativesPlus.Presentation.Controllers
 {
-    [Authorize(Policy = "ElevatedRights")]
+    [Authorize(Roles = RoleTypes.User + "," + RoleTypes.InitiativeEvaluator + "," + RoleTypes.SuperAdmin + "," + RoleTypes.InitiativeLead)]
     [Route("api/[controller]")]
     [ApiController]
     public class InitiativeController : ControllerBase
@@ -58,7 +59,7 @@ namespace InitiativesPlus.Presentation.Controllers
         [Route("join/{id}")]
         public async Task<IActionResult> JoinInitiative(int id)
         {
-            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             if (await _initiativeService.UserExistsInInitiativeAsync(id, userId))
             {
                 return BadRequest(string.Format(_errorLocalizer["AlreadyInInitiative"].Value));
@@ -117,10 +118,18 @@ namespace InitiativesPlus.Presentation.Controllers
 
         [HttpGet]
         [Route("events")]
-        public async Task<IActionResult> GetEventisForMonth()
+        public async Task<IActionResult> GetEventsForMonth()
         {
             var events = await _initiativeService.GetEventsForMonthAsync();
             return Ok(events);
+        }        
+        
+        [HttpGet]
+        [Route("users/{id}")]
+        public async Task<IActionResult> GetUsersInInitiative(int id)
+        {
+            var users = await _initiativeService.GetUsersForInitiative(id);
+            return Ok(users);
         }
     }
 }

@@ -45,6 +45,25 @@ namespace InitiativesPlus.Infrastructure.Data.Repositories
             return success;
         }
 
+        public async Task<bool> AssignLeadAsync(int initiativeId, int userId)
+        {
+            var user = await _context.InitiativeLeads.FirstOrDefaultAsync(u => u.InitiativeId == initiativeId);
+            if (user != null)
+                _context.InitiativeLeads.Remove(user);
+
+            await _context.InitiativeLeads.AddAsync(new InitiativeLead
+            {
+                InitiativeId = initiativeId,
+                UserId = userId
+            });
+            
+
+            var userInDb = await _context.Users.FindAsync(userId);
+            if (await _context.SaveChangesAsync() > 0)
+                return await AssignRoleAsync(userInDb.Username, (int) RoleTypes.RoleIds.InitiativeLead);
+            return false;
+        }
+
         public async Task<List<UserRole>> GetRolesAsync()
         {
             return await _context.UserRoles.ToListAsync();

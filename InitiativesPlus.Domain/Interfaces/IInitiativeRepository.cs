@@ -16,5 +16,6 @@ namespace InitiativesPlus.Domain.Interfaces
         Task<bool> CreateInitiativeAsync(Initiative initiative, string year);
         Task<bool> InitiativeExistsAsync(int id);
         Task<bool> InitiativeExistsAsync(string initiative, string year);
+        Task<List<User>> InitiativeUsers(int id);
     }
 }

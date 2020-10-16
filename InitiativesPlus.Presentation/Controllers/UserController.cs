@@ -90,8 +90,21 @@ namespace InitiativesPlus.Presentation.Controllers
                 return Ok();
             
             return BadRequest(string.Format(_errorLocalizer["FailedRoleUpdate"].Value, assignRoleViewModel.UserName));
-        }        
-        
+        }
+
+        [HttpPost("assign-lead")]
+        [Authorize(Roles = RoleTypes.InitiativeEvaluator)]
+        public async Task<IActionResult> AssignLead([FromBody] AssignLeadViewModel assignLeadViewModel)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (await _userService.AssignLeadAsync(assignLeadViewModel))
+                return Ok();
+
+            return BadRequest(string.Format(_errorLocalizer["FailedRoleUpdate"].Value, RoleTypes.InitiativeLead));
+        }
+
         [HttpPut("change-status")]
         [Authorize(Roles = RoleTypes.SuperAdmin)]
         public async Task<IActionResult> CgangeStatus([FromBody] ChangeUserStatusViewModel changeUserStatusViewModel)
